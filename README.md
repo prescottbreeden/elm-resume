@@ -4,6 +4,6 @@ Creating an html resume with vanilla html, js, and css is cool, but would make a
 
 ## scripts
 
-`yarn` -> install dependencies
-`yarn start` -> spool up dev server with elm live in watch mode
-`yarn sass` -> compile and watch scss files
+`yarn` -> install dependencies <br>
+`yarn start` -> spool up dev server with elm live in watch mode <br>
+`yarn sass` -> compile and watch scss files <br>
