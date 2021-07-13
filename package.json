@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "elm-live": "^4.0.2",
+    "sass": "^1.35.2"
+  },
+  "scripts": {
+    "start": "yarn elm-live src/Main.elm -- -- --output=main.js"
+  }
+}
