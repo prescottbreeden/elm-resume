@@ -17,6 +17,12 @@ body {
   // text-align: justify;
 }
 
-.highlight:hover {
-  background-color: rgba($amp-blue, .4);
+
+.highlight{
+  padding: .4rem;
+
+  &:hover {
+    background-color: rgba($amp-blue, .2);
+    border-radius: 4px;
+  }
 }

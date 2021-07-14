@@ -11,15 +11,20 @@ Creating an html resume with vanilla html, js, and css is cool, but would make a
 ## roadmap
 
 - [ ] svg icons
-- [ ] svg amplify logo
-- [ ] svg animation on amp logo
-- [ ] language animations
+- [ ] language detail animations
 - [ ] dynamic modal for detail content
-- [ ] filterable content
-- [ ] technical work experience
+- [ ] frontEnd, backEnd, databases, orms, devtools switch
+- [ ] interactive content for tools
+- [x] technical work experience
 - [ ] non-technical work experience
 - [ ] projects
-- [ ] nav menu button?
+- [ ] nav menu button
 - [ ] more cloud tech
-- [ ] animated collapsable sections
 - [ ] mobile view
+
+### stretch
+
+- [ ] svg amplify logo
+- [ ] svg animation on amp logo
+- [ ] animated collapsable sections
+- [ ] filterable content

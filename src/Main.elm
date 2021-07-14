@@ -1,9 +1,28 @@
 module Main exposing (main)
 
+import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
 
+type alias WorkExperience =
+    { org : String
+    , role : String
+    , date : String
+    , description : String
+    , accomplishments : List String
+    , tech : List String
+    }
+
+
+type alias Language =
+    { label : String
+    , interest : Int
+    , skill : Int
+    }
+
+
+azure : WorkExperience
 azure =
     { org = "Microsoft Azure AI (via AmplifyCP)"
     , role = "Lead UX/UI Software Engineer"
@@ -11,15 +30,18 @@ azure =
     , description = "Leading developers, designers and data engineers in Europe, India, South America, NZ, and US across several projects to showcase demos of Microsoft Azure AI technology to solve real-world problems for different sects of industry."
     , accomplishments =
         [ "Refactored five React apps into a single TOML configurable app"
+        , "Wrote automated scripts to speed up development pain-points"
+        , "Performance optimized Azure Media and Power BI embeds"
         , "Removed redundant or broken code with reusable abstractions"
         , "Managed deployment and production environments for all apps"
         , "Set scope and priorities for multiple international teams"
         , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
         ]
-    , tech = [ "React", "JavaScript", "Redux", "MSSql Server" ]
+    , tech = [ "React", "Redux", "TOML", "TypeScript" ]
     }
 
 
+pot : WorkExperience
 pot =
     { org = "Port of Tacoma (via AmplifyCP)"
     , role = "Lead Full-stack Software Engineer"
@@ -31,10 +53,11 @@ pot =
         , "Created performance dashboards for new APIs with React"
         , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
         ]
-    , tech = [ "React", "JavaScript", "Socket.io", "MSSql Server" ]
+    , tech = [ "React", "JavaScript", "Socket.io", "SQL Server" ]
     }
 
 
+colorado : WorkExperience
 colorado =
     { org = "Colorado Community College System (via AmplifyCP)"
     , role = "Full-stack Software Engineer"
@@ -50,10 +73,11 @@ colorado =
         , "Provided ongoing support and feature work"
         , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
         ]
-    , tech = [ "React", "TypeScript", "Redux", "SASS", "C#", "MSSql Server", "ASP.Net Core" ]
+    , tech = [ "React", "TypeScript", "Redux", "SASS", "C#", "SQL Server", "ASP.Net Core", "Entity Framework" ]
     }
 
 
+roles : List WorkExperience
 roles =
     [ azure
     , pot
@@ -61,36 +85,12 @@ roles =
     ]
 
 
-role data =
-    div [ class "experience" ]
-        [ p [ class "experience__role" ] [ text data.role ]
-        , p [ class "experience__org" ] [ text data.org ]
-        , p [ class "experience__date" ] [ text data.date ]
-        , p [ class "experience__description" ] [ text data.description ]
-        , ul [ class "experience__accomplishment-list" ]
-            (List.map
-                (\a ->
-                    li [ class "experience__accomplishment-item" ]
-                        [ span [ class "experience__accomplishment-text" ] [ text a ] ]
-                )
-                data.accomplishments
-            )
-        ]
-
-
-experience =
-    div [ class "box" ]
-        [ p [ class "box__title" ] [ text "Technical Work Experience" ]
-        , section [ class "experience--section" ]
-            (List.map role roles)
-        ]
-
-
+skills : List String
 skills =
     [ "Software Architecture"
     , "Functional Programming"
     , "Accessibility . UX Design"
-    , "Styling . Animations"
+    , "Dynamic Styling . Animations"
     , "Data Validation . Authentication"
     , "REST . GraphQL . WebSockets"
     , "Data Access Layers . Microservices"
@@ -98,10 +98,12 @@ skills =
     ]
 
 
+frontEnd : List String
 frontEnd =
     [ "Angular.io"
     , "BEM"
-    , "HTML / CSS / JS"
+    , "Canvas & SVG Animation"
+    , "HTML5 / CSS3 / ES6"
     , "jQuery"
     , "React / React Native"
     , "Redux"
@@ -110,6 +112,7 @@ frontEnd =
     ]
 
 
+backEnd : List String
 backEnd =
     [ "ASP.Net Core"
     , "Django"
@@ -121,15 +124,17 @@ backEnd =
     ]
 
 
+databases : List String
 databases =
     [ "CosmoDB"
-    , "MSSql Server"
     , "MongoDB"
     , "MySQL"
     , "Redis"
+    , "SQL Server"
     ]
 
 
+orms : List String
 orms =
     [ "Dapper"
     , "Entity Framework"
@@ -139,9 +144,11 @@ orms =
     ]
 
 
+devtools : List String
 devtools =
-    [ "Azure"
-    , "AWS"
+    [ "Automation"
+    , "AWS Cloud"
+    , "Azure Cloud"
     , "Bash"
     , "DevOps"
     , "Docker"
@@ -149,10 +156,12 @@ devtools =
     , "GitHub"
     , "Jira"
     , "Linux"
+    , "Miro"
     , "VIM"
     ]
 
 
+tools : List String
 tools =
     [ "ASP.Net Core"
     , "Angular.io"
@@ -179,6 +188,7 @@ tools =
     ]
 
 
+csharp : Language
 csharp =
     { label = "C#"
     , interest = 2
@@ -186,6 +196,7 @@ csharp =
     }
 
 
+clisp : Language
 clisp =
     { label = "Common Lisp"
     , interest = 10
@@ -193,6 +204,7 @@ clisp =
     }
 
 
+elm : Language
 elm =
     { label = "Elm"
     , interest = 10
@@ -200,6 +212,7 @@ elm =
     }
 
 
+fsharp : Language
 fsharp =
     { label = "F#"
     , interest = 9
@@ -207,6 +220,7 @@ fsharp =
     }
 
 
+javascript : Language
 javascript =
     { label = "JavaScript"
     , interest = 10
@@ -214,6 +228,7 @@ javascript =
     }
 
 
+python : Language
 python =
     { label = "Python"
     , interest = 8
@@ -221,6 +236,7 @@ python =
     }
 
 
+rust : Language
 rust =
     { label = "Rust"
     , interest = 10
@@ -228,6 +244,7 @@ rust =
     }
 
 
+scala : Language
 scala =
     { label = "Scala"
     , interest = 6
@@ -235,6 +252,7 @@ scala =
     }
 
 
+typescript : Language
 typescript =
     { label = "TypeScript"
     , interest = 8
@@ -242,6 +260,7 @@ typescript =
     }
 
 
+languages : List Language
 languages =
     [ csharp
     , clisp
@@ -255,10 +274,15 @@ languages =
     ]
 
 
+
+-- [ HTML snippets ]
+-- [ img [ class "header__logo", src "http://prescottbreeden.com/static/media/p_logo5.e5530b58.png" ] []
+
+
+resumeHeader : Html msg
 resumeHeader =
     header [ class "header" ]
         [ div [ class "page__left-col--header" ]
-            -- [ img [ class "header__logo", src "http://prescottbreeden.com/static/media/p_logo5.e5530b58.png" ] []
             [ img [ class "header__logo", src "https://www.amplifycp.com/wp-content/uploads/2020/11/Amplify-Consulting-Partners-Logo@3x.png" ] []
             ]
         , div [ class "header__primary" ]
@@ -270,6 +294,7 @@ resumeHeader =
         ]
 
 
+contact : Html msg
 contact =
     div [ class "box" ]
         [ p [ class "box__title" ] [ text "contact" ]
@@ -278,10 +303,16 @@ contact =
         ]
 
 
+
+-- [ Helper Functions ]
+
+
+listItem : String -> Html msg
 listItem data =
     li [ class "box__text" ] [ text data ]
 
 
+details : Language -> Html msg
 details data =
     li [ class "details" ]
         [ div [ class "details__container" ]
@@ -294,6 +325,7 @@ details data =
         ]
 
 
+skillsBox : List String -> Html msg
 skillsBox data =
     div [ class "box" ]
         [ p [ class "box__title" ] [ text "skills" ]
@@ -302,6 +334,7 @@ skillsBox data =
         ]
 
 
+languagesBox : List Language -> Html msg
 languagesBox data =
     div [ class "box" ]
         [ p [ class "box__title" ] [ text "languages" ]
@@ -320,6 +353,7 @@ languagesBox data =
         ]
 
 
+toolsBox : List String -> Html msg
 toolsBox data =
     div [ class "box" ]
         [ p [ class "box__title" ] [ text "technical & tools" ]
@@ -328,13 +362,33 @@ toolsBox data =
         ]
 
 
-footer =
-    div [ class "footer" ]
-        [ p [] [ text "Powered by Elm" ]
+role : WorkExperience -> Html msg
+role data =
+    div [ class "experience" ]
+        [ p [ class "experience__role" ] [ text data.role ]
+        , p [ class "experience__org" ] [ text data.org ]
+        , p [ class "experience__date" ] [ text data.date ]
+        , p [ class "experience__description" ] [ text data.description ]
+        , ul [ class "experience__accomplishment-list" ]
+            (List.map
+                (\a ->
+                    li [ class "experience__accomplishment-item" ]
+                        [ span [ class "experience__accomplishment-text" ] [ text a ] ]
+                )
+                data.accomplishments
+            )
         ]
 
 
-main =
+
+-- [ UPDATE VIEW AND MAIN ]
+
+
+update msg model =
+    model
+
+
+view model =
     div [ class "page" ]
         [ resumeHeader
         , div [ class "page__layout" ]
@@ -349,8 +403,18 @@ main =
                     [ p [ class "box__title" ] [ text "TL;DR" ]
                     , p [ class "summary__text" ] [ text "Passionate full-stack software developer with eight years of programming experience. Open-source contributor and author. Believes in life-long learning and that hot-sauce is a food group." ]
                     ]
-                , experience
+                , div [ class "box" ]
+                    [ p [ class "box__title" ] [ text "Technical Work Experience" ]
+                    , section [ class "experience--section" ]
+                        (List.map role roles)
+                    ]
                 ]
             ]
-        , footer
+        , footer [ class "footer" ]
+            [ p [] [ text "Powered by Elm" ]
+            ]
         ]
+
+
+main =
+    Browser.sandbox { init = 0, update = update, view = view }
