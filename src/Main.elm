@@ -47,7 +47,7 @@ clisp =
 elm =
     { label = "Elm"
     , interest = 8
-    , skill = 4
+    , skill = 5
     }
 
 
@@ -174,10 +174,10 @@ main =
         [ resumeHeader
         , div [ class "page__layout" ]
             [ div [ class "page__left-col" ]
-                [ languagesBox languages
+                [ contact
                 , skillsBox skills
+                , languagesBox languages
                 , toolsBox tools
-                , contact
                 ]
             , div [ class "box" ]
                 [ div [ class "summary" ]

@@ -32,7 +32,7 @@ body {
 }
 .page__left-col {
   min-width: 33%;
-  padding-right: 1rem;
+  padding-right: 2rem;
   border-right: 2px solid #ccc;
 }
 .page__left-col--header {
@@ -64,6 +64,7 @@ body {
 .header {
   padding-bottom: 1rem;
   border-bottom: 2px solid #ccc;
+  margin-bottom: 2rem;
   display: flex;
   align-items: flex-end;
 }
@@ -85,10 +86,11 @@ body {
   list-style-type: none;
   /* margin-bottom: 2rem; */
   padding: 1rem;
+  border-radius: 4px;
 }
-.details :hover {
+.details:hover {
   cursor: zoom-in;
-  background-color: rgba(80, 80, 80, 0.4);
+  background-color: rgba(19, 12, 64, 0.2);
 }
 .details__container {
   display: flex;
@@ -99,6 +101,7 @@ body {
   min-width: 50%;
 }
 .details__data {
+  border-left: 1px solid #130c40;
   min-width: 50%;
 }
 .details__skill--10 {
@@ -106,99 +109,117 @@ body {
   width: 100%;
   height: 1rem;
   margin-bottom: 0.4rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__interest--10 {
   background-color: #ff5655;
   width: 100%;
   height: 1rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__skill--9 {
   background-color: #130c40;
   width: 90%;
   height: 1rem;
   margin-bottom: 0.4rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__interest--9 {
   background-color: #ff5655;
   width: 90%;
   height: 1rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__skill--8 {
   background-color: #130c40;
   width: 80%;
   height: 1rem;
   margin-bottom: 0.4rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__interest--8 {
   background-color: #ff5655;
   width: 80%;
   height: 1rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__skill--7 {
   background-color: #130c40;
   width: 70%;
   height: 1rem;
   margin-bottom: 0.4rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__interest--7 {
   background-color: #ff5655;
   width: 70%;
   height: 1rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__skill--6 {
   background-color: #130c40;
   width: 60%;
   height: 1rem;
   margin-bottom: 0.4rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__interest--6 {
   background-color: #ff5655;
   width: 60%;
   height: 1rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__skill--5 {
   background-color: #130c40;
   width: 50%;
   height: 1rem;
   margin-bottom: 0.4rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__interest--5 {
   background-color: #ff5655;
   width: 50%;
   height: 1rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__skill--4 {
   background-color: #130c40;
   width: 40%;
   height: 1rem;
   margin-bottom: 0.4rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__interest--4 {
   background-color: #ff5655;
   width: 40%;
   height: 1rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__skill--3 {
   background-color: #130c40;
   width: 30%;
   height: 1rem;
+  border-radius: 0 2px 2px 0;
   margin-bottom: 0.4rem;
 }
 .details__interest--3 {
   background-color: #ff5655;
   width: 30%;
   height: 1rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__skill--2 {
   background-color: #130c40;
   width: 20%;
   height: 1rem;
   margin-bottom: 0.4rem;
+  border-radius: 0 2px 2px 0;
 }
 .details__interest--2 {
   background-color: #ff5655;
   width: 20%;
   height: 1rem;
+  border-radius: 0 2px 2px 0;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -7,3 +7,19 @@ Creating an html resume with vanilla html, js, and css is cool, but would make a
 `yarn` -> install dependencies <br>
 `yarn start` -> spool up dev server with elm live in watch mode <br>
 `yarn sass` -> compile and watch scss files <br>
+
+## roadmap
+
+- [ ] svg icons
+- [ ] svg amplify logo
+- [ ] svg animation on amp logo
+- [ ] language animations
+- [ ] dynamic modal for detail content
+- [ ] filterable content
+- [ ] technical work experience
+- [ ] non-technical work experience
+- [ ] projects
+- [ ] nav menu button?
+- [ ] more cloud tech
+- [ ] animated collapsable sections
+- [ ] mobile view

@@ -5,6 +5,6 @@
   },
   "scripts": {
     "start": "yarn elm-live src/Main.elm -- -- --output=main.js",
-    "sass": "yarn sass ./sass/main.scss ./style.css -w"
+    "watch-sass": "yarn sass ./sass/main.scss ./style.css -w"
   }
 }
