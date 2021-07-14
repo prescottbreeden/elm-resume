@@ -1,12 +1,14 @@
 .header {
-  padding-bottom: 1rem;
-  border-bottom: 2px solid $border-color;
-  margin-bottom: 2rem;
-  display: flex;
   align-items: flex-end;
+  border-bottom: 2px solid $border-color;
+  display: flex;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+
   &__logo {
     height: 10rem;
   }
+
   &__primary {
     margin-bottom: 1rem;
   }
@@ -14,7 +16,8 @@
     font-weight: 400;
   }
   &__title {
-    text-transform: uppercase;
     font-size: 1.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 }

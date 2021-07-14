@@ -1,16 +1,20 @@
 .box {
-  border-bottom: 2px solid $border-color;
   padding: 2rem;
-  &__title {
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-
+  &:not(:last-child) {
+    border-bottom: 2px solid $border-color;
   }
+
+  &__title {
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
   &__text {
+    color: #222;
+    font-size: 1.8rem;
     list-style-type: none;
     padding: .5rem 0;
-    font-size: 1.8rem;
-    color: #222;
   }
 }
 

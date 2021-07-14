@@ -2,24 +2,29 @@
   background-color: #eee;;
   border-radius: 5px;
   font-size: 2rem;
-  padding: 2rem;
-  max-width: 100rem;
   margin: 0 auto;
+  max-width: 100rem;
   min-height: 100vh;
+  padding: 2rem;
+
   &__layout {
     display: flex;
   }
+
   &__left-col {
-    min-width: 33%;
+    min-width: 34%;
+    max-width: 34%;
     padding-right: 2rem;
     border-right: 2px solid $border-color;
   }
+
   &__left-col--header {
     width: 35%;
     padding-right: 1rem;
     display: flex;
     justify-content: center;
   }
+
   &__right-col {
     padding-left: 1rem;
     width: 60%;

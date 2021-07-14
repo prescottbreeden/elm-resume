@@ -1,0 +1,32 @@
+.legend {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+
+  &__key {
+    align-items: center;
+    display: flex;
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+  }
+
+  &__color {
+    border-radius: 4px;
+    height: 1.5rem;
+    margin-right: .5rem;
+    width: 1.5rem;
+
+    &--skill {
+      background-color: $amp-blue;
+    }
+
+    &--interest {
+      background-color: $amp-red;
+    }
+  }
+
+  &__text {
+    font-size: 1.5rem;
+  }
+}
