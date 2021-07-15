@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -23,6 +24,62 @@ body {
 .highlight:hover {
   background-color: rgba(19, 12, 64, 0.2);
   border-radius: 4px;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50rem;
+  height: 50rem;
+  background-color: #333;
+  display: none;
+}
+
+.open {
+  display: initial;
+}
+
+.tools {
+  margin-top: 1rem;
+  text-align: center;
+}
+.tools__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.tools__nav {
+  position: relative;
+  font-size: 1.8rem;
+  padding: 1rem;
+  border-radius: 4px;
+  display: flex;
+}
+.tools__nav--active {
+  background-color: #130c40;
+  color: #eee;
+}
+.tools__nav:hover {
+  cursor: pointer;
+}
+.tools__nav::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.4rem;
+  background-color: #130c40;
+  transform: scaleX(0);
+  transition: transform 0.2s, background-color 0.1s;
+}
+.tools__nav:hover::before {
+  transform: scaleY(1);
+}
+.tools__data {
+  font-size: 1.6rem;
 }
 
 .page {

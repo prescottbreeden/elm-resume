@@ -1,8 +1,16 @@
 module Main exposing (main)
 
 import Browser
+import Browser.Dom as Dom
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
+
+
+type alias Model =
+    { modalOpen : Bool
+    , language : String
+    }
 
 
 type alias WorkExperience =
@@ -104,8 +112,8 @@ frontEnd =
     , "BEM"
     , "Canvas & SVG Animation"
     , "HTML5 / CSS3 / ES6"
-    , "jQuery"
-    , "React / React Native"
+    , "React "
+    , "React Native"
     , "Redux"
     , "SASS (scss)"
     , "Socket.io"
@@ -127,19 +135,15 @@ backEnd =
 databases : List String
 databases =
     [ "CosmoDB"
+    , "Dapper"
+    , "Entity Framework"
     , "MongoDB"
+    , "Mongoose.js"
     , "MySQL"
     , "Redis"
-    , "SQL Server"
-    ]
-
-
-orms : List String
-orms =
-    [ "Dapper"
-    , "Entity Framework"
-    , "Mongoose.js"
     , "SQL Alchemy"
+    , "SQL Server"
+    , "Sqlite"
     , "TypeORM"
     ]
 
@@ -279,7 +283,7 @@ languages =
 -- [ img [ class "header__logo", src "http://prescottbreeden.com/static/media/p_logo5.e5530b58.png" ] []
 
 
-resumeHeader : Html msg
+resumeHeader : Html Msg
 resumeHeader =
     header [ class "header" ]
         [ div [ class "page__left-col--header" ]
@@ -294,7 +298,7 @@ resumeHeader =
         ]
 
 
-contact : Html msg
+contact : Html Msg
 contact =
     div [ class "box" ]
         [ p [ class "box__title" ] [ text "contact" ]
@@ -307,25 +311,30 @@ contact =
 -- [ Helper Functions ]
 
 
-listItem : String -> Html msg
+handleClick e =
+    Dom.getViewportOf e
+
+
+listItem : String -> Html Msg
 listItem data =
     li [ class "box__text" ] [ text data ]
 
 
-details : Language -> Html msg
-details data =
+details : Language -> Html Msg
+details model =
     li [ class "details" ]
-        [ div [ class "details__container" ]
-            [ p [ class "details__label" ] [ text data.label ]
+        [ div
+            [ class "details__container", onClick Open ]
+            [ p [ class "details__label" ] [ text model.label ]
             , div [ class "details__data" ]
-                [ p [ class ("details__skill--" ++ String.fromInt data.skill) ] []
-                , p [ class ("details__interest--" ++ String.fromInt data.interest) ] []
+                [ p [ class ("details__skill--" ++ String.fromInt model.skill) ] []
+                , p [ class ("details__interest--" ++ String.fromInt model.interest) ] []
                 ]
             ]
         ]
 
 
-skillsBox : List String -> Html msg
+skillsBox : List String -> Html Msg
 skillsBox data =
     div [ class "box" ]
         [ p [ class "box__title" ] [ text "skills" ]
@@ -334,7 +343,7 @@ skillsBox data =
         ]
 
 
-languagesBox : List Language -> Html msg
+languagesBox : List Language -> Html Msg
 languagesBox data =
     div [ class "box" ]
         [ p [ class "box__title" ] [ text "languages" ]
@@ -353,16 +362,21 @@ languagesBox data =
         ]
 
 
-toolsBox : List String -> Html msg
+toolsBox : List String -> Html Msg
 toolsBox data =
-    div [ class "box" ]
-        [ p [ class "box__title" ] [ text "technical & tools" ]
-        , div []
+    div [ class "tools" ]
+        [ div [ class "tools__header" ]
+            [ p [ class "tools__nav tools__nav--active" ] [ text "FrontEnd" ]
+            , p [ class "tools__nav" ] [ text "BackEnd" ]
+            , p [ class "tools__nav" ] [ text "Databases" ]
+            , p [ class "tools__nav" ] [ text "Tools" ]
+            ]
+        , div [ class "tools__data" ]
             (List.map (\s -> p [ class "highlight" ] [ text s ]) data)
         ]
 
 
-role : WorkExperience -> Html msg
+role : WorkExperience -> Html Msg
 role data =
     div [ class "experience" ]
         [ p [ class "experience__role" ] [ text data.role ]
@@ -384,8 +398,50 @@ role data =
 -- [ UPDATE VIEW AND MAIN ]
 
 
+initialModel : Model
+initialModel =
+    { modalOpen = False
+    , language = ""
+    }
+
+
+type Msg
+    = Open
+    | Close
+    | Balls
+    | FrontEnd
+    | BackEnd
+    | Databases
+    | Orms
+    | Tools
+
+
+update : Msg -> Model -> Model
 update msg model =
-    model
+    case msg of
+        Open ->
+            { model | modalOpen = True, language = "javascript" }
+
+        Close ->
+            { model | modalOpen = False, language = "" }
+
+        Balls ->
+            model
+
+        FrontEnd ->
+            model
+
+        BackEnd ->
+            model
+
+        Databases ->
+            model
+
+        Orms ->
+            model
+
+        Tools ->
+            model
 
 
 view model =
@@ -396,7 +452,7 @@ view model =
                 [ contact
                 , skillsBox skills
                 , languagesBox languages
-                , toolsBox tools
+                , toolsBox frontEnd
                 ]
             , div [ class "page__right-col" ]
                 [ div [ class "box" ]
@@ -413,8 +469,19 @@ view model =
         , footer [ class "footer" ]
             [ p [] [ text "Powered by Elm" ]
             ]
+        , div
+            [ class
+                (if model.modalOpen then
+                    "modal open"
+
+                 else
+                    "modal"
+                )
+            ]
+            [ p [] [ text "dingos" ]
+            ]
         ]
 
 
 main =
-    Browser.sandbox { init = 0, update = update, view = view }
+    Browser.sandbox { init = initialModel, update = update, view = view }
