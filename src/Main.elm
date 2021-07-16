@@ -5,6 +5,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import List.Extra exposing (elemIndex)
+import Svg
+import Svg.Attributes
 
 
 type alias Msg =
@@ -365,6 +367,14 @@ languages =
 -- [ img [ class "header__logo", src "http://prescottbreeden.com/static/media/p_logo5.e5530b58.png" ] []
 
 
+linkedInIcon =
+    [ "M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z" ]
+
+
+envelopIcon =
+    [ "M29 4h-26c-1.65 0-3 1.35-3 3v20c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-20c0-1.65-1.35-3-3-3zM12.461 17.199l-8.461 6.59v-15.676l8.461 9.086zM5.512 8h20.976l-10.488 7.875-10.488-7.875zM12.79 17.553l3.21 3.447 3.21-3.447 6.58 8.447h-19.579l6.58-8.447zM19.539 17.199l8.461-9.086v15.676l-8.461-6.59z" ]
+
+
 resumeHeader : Html Msg
 resumeHeader =
     header [ class "header" ]
@@ -380,12 +390,27 @@ resumeHeader =
         ]
 
 
+icon : List String -> Html Msg
+icon paths =
+    Svg.svg [] (List.map (\p -> Svg.path [ Svg.Attributes.d p ] []) paths)
+
+
 contact : Html Msg
 contact =
     div [ class "box" ]
         [ p [ class "box__title" ] [ text "contact" ]
-        , p [ class "box__text" ] [ text "prescott@amplifycp.com" ]
-        , p [ class "box__text" ] [ text "/in/prescottbreeden" ]
+        , p [ class "box__row" ]
+            [ span [ class "box__icon" ] [ icon envelopIcon ]
+            , span [ class "box__text" ]
+                [ text "prescott@amplifycp.com"
+                ]
+            ]
+        , p [ class "box__row" ]
+            [ span [ class "box__icon" ] [ icon linkedInIcon ]
+            , span [ class "box__text" ]
+                [ text "/in/prescottbreeden"
+                ]
+            ]
         ]
 
 

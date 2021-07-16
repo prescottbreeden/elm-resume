@@ -267,6 +267,16 @@ $breakpoint argument choices:
   list-style-type: none;
   padding: 0.5rem 0;
 }
+.box__row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+.box__icon {
+  height: 3rem;
+  width: 3rem;
+  margin-right: 2rem;
+}
 
 .details {
   border-radius: 4px;

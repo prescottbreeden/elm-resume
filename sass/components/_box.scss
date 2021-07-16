@@ -16,5 +16,16 @@
     list-style-type: none;
     padding: .5rem 0;
   }
+
+  &__row {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+  }
+  &__icon {
+    height: 3rem;
+    width: 3rem;
+    margin-right: 2rem;
+  }
 }
 
