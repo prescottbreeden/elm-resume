@@ -56,9 +56,11 @@ body {
   &__nav {
     position: relative;
     font-size: 1.8rem;
-    padding: 1rem;
+    padding: .3rem;
     border-radius: 4px;
     display: flex;
+    width: 25%;
+    justify-content: center;
 
     &--active {
       background-color: $amp-blue;
@@ -85,8 +87,53 @@ body {
   }
 
 
-  &__data {
+  &__item {
+    display: none;
     font-size: 1.6rem;
+    padding: .5rem;
+  }
+}
+.waterfall {
+    @for $i from 1 through 50 {
+      &--#{$i} {
+        display: block;
+        opacity: 0;
+        font-size: 1.6rem;
+        animation: enter .25s ease-in #{$i * .1}s 1 forwards;
 
+        &:hover {
+          background-color: rgba($amp-blue, .2);
+        }
+      }
+    }
+}
+.nav-menu {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 5rem;
+  height: 5rem;
+  background-color: $amp-red;
+  border-radius: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+  line-height: 4.6rem;
+  box-shadow: .25rem .25rem 3rem 1rem rgba(0, 0, 0, .2);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateX(-5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

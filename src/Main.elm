@@ -5,12 +5,7 @@ import Browser.Dom as Dom
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
-
-
-type alias Model =
-    { modalOpen : Bool
-    , language : String
-    }
+import List.Extra exposing (elemIndex)
 
 
 type alias WorkExperience =
@@ -49,6 +44,21 @@ azure =
     }
 
 
+emma : WorkExperience
+emma =
+    { org = "AmplifyCP"
+    , role = "Lead Full-stack Software Engineer"
+    , date = "March 2021 - Present"
+    , description = "An internal project at AmplifyCP, Emma is a web application and mobile app that helps parents that have children with congenital CMV monitor, track, and make recommendations based on medical and behavioral interventions."
+    , accomplishments =
+        [ "Designed and implemented full-stack architecture"
+        , "Created Collaboration Documents for PMs, Designers, and Engineers through Miro"
+        , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
+        ]
+    , tech = [ "Express.js", "MongoDB", "Mongoose", "React", "Redux", "TypeScript" ]
+    }
+
+
 pot : WorkExperience
 pot =
     { org = "Port of Tacoma (via AmplifyCP)"
@@ -62,6 +72,20 @@ pot =
         , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
         ]
     , tech = [ "React", "JavaScript", "Socket.io", "SQL Server" ]
+    }
+
+
+playboy : WorkExperience
+playboy =
+    { org = "Playboy Group, Inc. (via AmplifyCP)"
+    , role = "Software Engineer"
+    , date = "May 2021 - May 2021"
+    , description = "Worked for Playboy company acquisition, TLA, to create automated scripts to handle data migration needs."
+    , accomplishments =
+        [ "Created Python scripts to run nightly data migrations from an on-premise server into Snowflake to enable data viz"
+        , "Collaborated with Data Viz specialists to solve roadblocks"
+        ]
+    , tech = [ "Python", "Pandas", "Snowflake", "SQL Server" ]
     }
 
 
@@ -85,11 +109,30 @@ colorado =
     }
 
 
+graphAPI : WorkExperience
+graphAPI =
+    { org = "Microsoft Graph Security API (via AmplifyCP)"
+    , role = "Technical Program Manager"
+    , date = "August 2019 - August 2019"
+    , description = "Creating and updating example solutions and documentation for Microsoft Graph API integrations with various security related systems."
+    , accomplishments =
+        [ "Wrote implementations in C#, Python, and JavaScript"
+        , "Liason between customers and community and dev team"
+        , "Maintained public-facing documentation on GitHub"
+        , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
+        ]
+    , tech = [ "React", "TypeScript", "Redux", "SASS", "C#", "SQL Server", "ASP.Net Core", "Entity Framework" ]
+    }
+
+
 roles : List WorkExperience
 roles =
     [ azure
+    , playboy
+    , emma
     , pot
     , colorado
+    , graphAPI
     ]
 
 
@@ -109,42 +152,56 @@ skills =
 frontEnd : List String
 frontEnd =
     [ "Angular.io"
+    , "Apollo Client"
     , "BEM"
-    , "Canvas & SVG Animation"
-    , "HTML5 / CSS3 / ES6"
+    , "Canvas Animation"
+    , "CSS"
+    , "ES6"
+    , "HTML"
     , "React "
     , "React Native"
     , "Redux"
-    , "SASS (scss)"
+    , "SASS (.scss)"
     , "Socket.io"
+    , "SVG Animation"
+    , "Webpack"
     ]
 
 
 backEnd : List String
 backEnd =
     [ "ASP.Net Core"
+    , "Apollo Server"
+    , "CosmoDB"
+    , "Dapper"
     , "Django"
+    , "Entity Framework"
     , "Express.js"
     , "Flask"
-    , "Node.js"
-    , "OAuth"
-    , "Socket.io"
-    ]
-
-
-databases : List String
-databases =
-    [ "CosmoDB"
-    , "Dapper"
-    , "Entity Framework"
     , "MongoDB"
     , "Mongoose.js"
     , "MySQL"
+    , "Node.js"
+    , "OAuth"
     , "Redis"
-    , "SQL Alchemy"
     , "SQL Server"
-    , "Sqlite"
-    , "TypeORM"
+    , "SQLite"
+    ]
+
+
+testing : List String
+testing =
+    [ "Cypress"
+    , "DocTest"
+    , "Enzyme"
+    , "Istanbul"
+    , "Jest"
+    , "Mocha"
+    , "PyTest"
+    , "Python unittest"
+    , "React Testing Library"
+    , "Selenium"
+    , "xUnit"
     ]
 
 
@@ -153,12 +210,11 @@ devtools =
     [ "Automation"
     , "AWS Cloud"
     , "Azure Cloud"
-    , "Bash"
-    , "DevOps"
+    , "Azure DevOps"
+    , "Bash Scripting"
     , "Docker"
     , "Git"
     , "GitHub"
-    , "Jira"
     , "Linux"
     , "Miro"
     , "VIM"
@@ -324,7 +380,7 @@ details : Language -> Html Msg
 details model =
     li [ class "details" ]
         [ div
-            [ class "details__container", onClick Open ]
+            [ class "details__container", onClick { operation = "OPEN", data = model.label } ]
             [ p [ class "details__label" ] [ text model.label ]
             , div [ class "details__data" ]
                 [ p [ class ("details__skill--" ++ String.fromInt model.skill) ] []
@@ -362,17 +418,43 @@ languagesBox data =
         ]
 
 
-toolsBox : List String -> Html Msg
-toolsBox data =
+toolsClass : ActiveTools -> Model -> String
+toolsClass thing model =
+    if model.activeTools == thing then
+        "tools__nav tools__nav--active"
+
+    else
+        "tools__nav"
+
+
+setTech action =
+    { operation = action, data = "" }
+
+
+listIndex x xs =
+    case elemIndex x xs of
+        Just val ->
+            "--" ++ Debug.toString (val + 1)
+
+        Nothing ->
+            "--0"
+
+
+toolsBox : Model -> Html Msg
+toolsBox model =
     div [ class "tools" ]
         [ div [ class "tools__header" ]
-            [ p [ class "tools__nav tools__nav--active" ] [ text "FrontEnd" ]
-            , p [ class "tools__nav" ] [ text "BackEnd" ]
-            , p [ class "tools__nav" ] [ text "Databases" ]
-            , p [ class "tools__nav" ] [ text "Tools" ]
+            [ div [ class (toolsClass FrontEnd model), onClick (setTech "FRONT_END") ] [ text "Browser" ]
+            , p [ class (toolsClass BackEnd model), onClick (setTech "BACK_END") ] [ text "Server" ]
+            , p [ class (toolsClass Test model), onClick (setTech "TEST") ] [ text "Testing" ]
+            , p [ class (toolsClass Tools model), onClick (setTech "TOOLS") ] [ text "Dev Tools" ]
             ]
         , div [ class "tools__data" ]
-            (List.map (\s -> p [ class "highlight" ] [ text s ]) data)
+            (List.map (\s -> p [ class ("tools__item waterfall" ++ listIndex s model.tools) ] [ text s ]) frontEnd
+                ++ List.map (\s -> p [ class ("tools__item waterfall" ++ listIndex s model.tools) ] [ text s ]) backEnd
+                ++ List.map (\s -> p [ class ("tools__item waterfall" ++ listIndex s model.tools) ] [ text s ]) testing
+                ++ List.map (\s -> p [ class ("tools__item waterfall" ++ listIndex s model.tools) ] [ text s ]) devtools
+            )
         ]
 
 
@@ -398,50 +480,65 @@ role data =
 -- [ UPDATE VIEW AND MAIN ]
 
 
-initialModel : Model
-initialModel =
-    { modalOpen = False
-    , language = ""
+type alias Msg =
+    { operation : String
+    , data : String
     }
-
-
-type Msg
-    = Open
-    | Close
-    | Balls
-    | FrontEnd
-    | BackEnd
-    | Databases
-    | Orms
-    | Tools
 
 
 update : Msg -> Model -> Model
 update msg model =
-    case msg of
-        Open ->
+    case msg.operation of
+        "OPEN" ->
             { model | modalOpen = True, language = "javascript" }
 
-        Close ->
+        "CLOSE" ->
             { model | modalOpen = False, language = "" }
 
-        Balls ->
+        "FRONT_END" ->
+            { model | activeTools = FrontEnd, tools = frontEnd }
+
+        "BACK_END" ->
+            { model | activeTools = BackEnd, tools = backEnd }
+
+        "TEST" ->
+            { model | activeTools = Test, tools = testing }
+
+        "TOOLS" ->
+            { model | activeTools = Tools, tools = devtools }
+
+        _ ->
             model
 
-        FrontEnd ->
-            model
 
-        BackEnd ->
-            model
+type ActiveTools
+    = FrontEnd
+    | BackEnd
+    | Test
+    | Tools
 
-        Databases ->
-            model
 
-        Orms ->
-            model
+type alias Model =
+    { modalOpen : Bool
+    , language : String
+    , skills : List String
+    , languages : List Language
+    , tools : List String
+    , experience : List WorkExperience
+    , activeTools : ActiveTools
+    }
 
-        Tools ->
-            model
+
+initialModel : Model
+initialModel =
+    { modalOpen = False
+    , language = ""
+    , skills = skills
+    , languages = languages
+    , tools = frontEnd
+    , experience = roles
+    , activeTools = FrontEnd
+    }
 
 
 view model =
@@ -450,9 +547,9 @@ view model =
         , div [ class "page__layout" ]
             [ div [ class "page__left-col" ]
                 [ contact
-                , skillsBox skills
-                , languagesBox languages
-                , toolsBox frontEnd
+                , skillsBox model.skills
+                , languagesBox model.languages
+                , toolsBox model
                 ]
             , div [ class "page__right-col" ]
                 [ div [ class "box" ]
@@ -462,9 +559,10 @@ view model =
                 , div [ class "box" ]
                     [ p [ class "box__title" ] [ text "Technical Work Experience" ]
                     , section [ class "experience--section" ]
-                        (List.map role roles)
+                        (List.map role model.experience)
                     ]
                 ]
+            , div [ class "nav-menu" ] [ text "+" ]
             ]
         , footer [ class "footer" ]
             [ p [] [ text "Powered by Elm" ]
