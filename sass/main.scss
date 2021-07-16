@@ -1,13 +1,18 @@
-@import './variables';
-@import './base';
+// base
+@import './base/variables';
+@import './base/animations';
+@import './base/base';
 
 // layout
-@import './page';
-@import './header';
-@import './footer';
+@import './layouts/header';
+@import './layouts/footer';
 
 // components
-@import './box';
-@import './details';
-@import './legend';
-@import './experience';
+@import './components/box';
+@import './components/details';
+@import './components/experience';
+@import './components/legend';
+@import './components/tools';
+
+// pages
+@import './pages/page';

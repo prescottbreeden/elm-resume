@@ -1,19 +1,39 @@
 module Main exposing (main)
 
 import Browser
-import Browser.Dom as Dom
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import List.Extra exposing (elemIndex)
 
 
+type alias Msg =
+    { operation : String
+    , data : String
+    }
+
+
+type ActiveTools
+    = FrontEnd
+    | BackEnd
+    | Test
+    | Tools
+
+
+type Views
+    = Overview
+    | Projects
+    | Technical
+    | NonTechnical
+
+
 type alias WorkExperience =
-    { org : String
-    , role : String
+    { accomplishments : List String
     , date : String
     , description : String
-    , accomplishments : List String
+    , feature : Bool
+    , org : String
+    , role : String
     , tech : List String
     }
 
@@ -28,6 +48,7 @@ type alias Language =
 azure : WorkExperience
 azure =
     { org = "Microsoft Azure AI (via AmplifyCP)"
+    , feature = True
     , role = "Lead UX/UI Software Engineer"
     , date = "May 2021 - July 2021"
     , description = "Leading developers, designers and data engineers in Europe, India, South America, NZ, and US across several projects to showcase demos of Microsoft Azure AI technology to solve real-world problems for different sects of industry."
@@ -36,7 +57,7 @@ azure =
         , "Wrote automated scripts to speed up development pain-points"
         , "Performance optimized Azure Media and Power BI embeds"
         , "Removed redundant or broken code with reusable abstractions"
-        , "Managed deployment and production environments for all apps"
+        , "Managed deployment and production environments"
         , "Set scope and priorities for multiple international teams"
         , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
         ]
@@ -47,6 +68,7 @@ azure =
 emma : WorkExperience
 emma =
     { org = "AmplifyCP"
+    , feature = True
     , role = "Lead Full-stack Software Engineer"
     , date = "March 2021 - Present"
     , description = "An internal project at AmplifyCP, Emma is a web application and mobile app that helps parents that have children with congenital CMV monitor, track, and make recommendations based on medical and behavioral interventions."
@@ -62,6 +84,7 @@ emma =
 pot : WorkExperience
 pot =
     { org = "Port of Tacoma (via AmplifyCP)"
+    , feature = True
     , role = "Lead Full-stack Software Engineer"
     , date = "March 2021 - Present"
     , description = "Overhauling and updating various services for the Port of Tacoma, including new solutions that integrate with legacy APIs."
@@ -78,6 +101,7 @@ pot =
 playboy : WorkExperience
 playboy =
     { org = "Playboy Group, Inc. (via AmplifyCP)"
+    , feature = False
     , role = "Software Engineer"
     , date = "May 2021 - May 2021"
     , description = "Worked for Playboy company acquisition, TLA, to create automated scripts to handle data migration needs."
@@ -92,6 +116,7 @@ playboy =
 colorado : WorkExperience
 colorado =
     { org = "Colorado Community College System (via AmplifyCP)"
+    , feature = True
     , role = "Full-stack Software Engineer"
     , date = "August 2019 - Present"
     , description = "Ongoing project that replaced five 15+ year-old web applications with a single, cloud-based, solution."
@@ -112,6 +137,7 @@ colorado =
 graphAPI : WorkExperience
 graphAPI =
     { org = "Microsoft Graph Security API (via AmplifyCP)"
+    , feature = False
     , role = "Technical Program Manager"
     , date = "August 2019 - August 2019"
     , description = "Creating and updating example solutions and documentation for Microsoft Graph API integrations with various security related systems."
@@ -367,10 +393,6 @@ contact =
 -- [ Helper Functions ]
 
 
-handleClick e =
-    Dom.getViewportOf e
-
-
 listItem : String -> Html Msg
 listItem data =
     li [ class "box__text" ] [ text data ]
@@ -434,27 +456,32 @@ setTech action =
 listIndex x xs =
     case elemIndex x xs of
         Just val ->
-            "--" ++ Debug.toString (val + 1)
+            " tools__appear--" ++ Debug.toString (val + 1)
 
         Nothing ->
-            "--0"
+            " tools__appear--0"
 
 
 toolsBox : Model -> Html Msg
 toolsBox model =
-    div [ class "tools" ]
-        [ div [ class "tools__header" ]
-            [ div [ class (toolsClass FrontEnd model), onClick (setTech "FRONT_END") ] [ text "Browser" ]
-            , p [ class (toolsClass BackEnd model), onClick (setTech "BACK_END") ] [ text "Server" ]
-            , p [ class (toolsClass Test model), onClick (setTech "TEST") ] [ text "Testing" ]
-            , p [ class (toolsClass Tools model), onClick (setTech "TOOLS") ] [ text "Dev Tools" ]
+    div [ class "box" ]
+        [ p [ class "box__title" ]
+            [ text "Technology & Tools" ]
+        , div
+            [ class "tools" ]
+            [ div [ class "tools__options" ]
+                [ div [ class (toolsClass FrontEnd model), onClick (setTech "FRONT_END") ] [ text "Front End" ]
+                , p [ class (toolsClass BackEnd model), onClick (setTech "BACK_END") ] [ text "Back End" ]
+                , p [ class (toolsClass Test model), onClick (setTech "TEST") ] [ text "Testing" ]
+                , p [ class (toolsClass Tools model), onClick (setTech "TOOLS") ] [ text "Dev Tools" ]
+                ]
+            , div [ class "tools__data" ]
+                (List.map (\s -> p [ class ("tools__item" ++ listIndex s model.tools) ] [ text s ]) frontEnd
+                    ++ List.map (\s -> p [ class ("tools__item" ++ listIndex s model.tools) ] [ text s ]) backEnd
+                    ++ List.map (\s -> p [ class ("tools__item" ++ listIndex s model.tools) ] [ text s ]) testing
+                    ++ List.map (\s -> p [ class ("tools__item" ++ listIndex s model.tools) ] [ text s ]) devtools
+                )
             ]
-        , div [ class "tools__data" ]
-            (List.map (\s -> p [ class ("tools__item waterfall" ++ listIndex s model.tools) ] [ text s ]) frontEnd
-                ++ List.map (\s -> p [ class ("tools__item waterfall" ++ listIndex s model.tools) ] [ text s ]) backEnd
-                ++ List.map (\s -> p [ class ("tools__item waterfall" ++ listIndex s model.tools) ] [ text s ]) testing
-                ++ List.map (\s -> p [ class ("tools__item waterfall" ++ listIndex s model.tools) ] [ text s ]) devtools
-            )
         ]
 
 
@@ -480,21 +507,9 @@ role data =
 -- [ UPDATE VIEW AND MAIN ]
 
 
-type alias Msg =
-    { operation : String
-    , data : String
-    }
-
-
 update : Msg -> Model -> Model
 update msg model =
     case msg.operation of
-        "OPEN" ->
-            { model | modalOpen = True, language = "javascript" }
-
-        "CLOSE" ->
-            { model | modalOpen = False, language = "" }
-
         "FRONT_END" ->
             { model | activeTools = FrontEnd, tools = frontEnd }
 
@@ -511,33 +526,26 @@ update msg model =
             model
 
 
-type ActiveTools
-    = FrontEnd
-    | BackEnd
-    | Test
-    | Tools
-
-
 type alias Model =
-    { modalOpen : Bool
-    , language : String
+    { language : String
     , skills : List String
     , languages : List Language
     , tools : List String
     , experience : List WorkExperience
     , activeTools : ActiveTools
+    , currentView : Views
     }
 
 
 initialModel : Model
 initialModel =
-    { modalOpen = False
-    , language = ""
+    { language = ""
     , skills = skills
     , languages = languages
     , tools = frontEnd
     , experience = roles
     , activeTools = FrontEnd
+    , currentView = Overview
     }
 
 
@@ -559,24 +567,13 @@ view model =
                 , div [ class "box" ]
                     [ p [ class "box__title" ] [ text "Technical Work Experience" ]
                     , section [ class "experience--section" ]
-                        (List.map role model.experience)
+                        (List.map role (List.filter (\e -> e.feature) model.experience))
                     ]
                 ]
             , div [ class "nav-menu" ] [ text "+" ]
             ]
         , footer [ class "footer" ]
-            [ p [] [ text "Powered by Elm" ]
-            ]
-        , div
-            [ class
-                (if model.modalOpen then
-                    "modal open"
-
-                 else
-                    "modal"
-                )
-            ]
-            [ p [] [ text "dingos" ]
+            [ p [] [ text "Written in Elm" ]
             ]
         ]
 
