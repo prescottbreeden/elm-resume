@@ -7,6 +7,8 @@ import Html.Events exposing (onClick)
 import List.Extra exposing (elemIndex)
 import Svg
 import Svg.Attributes
+import Tech exposing (..)
+import WorkExperience exposing (..)
 
 
 type alias Msg =
@@ -29,344 +31,6 @@ type Views
     | NonTechnical
 
 
-type alias WorkExperience =
-    { accomplishments : List String
-    , date : String
-    , description : String
-    , feature : Bool
-    , org : String
-    , role : String
-    , tech : List String
-    }
-
-
-type alias Language =
-    { label : String
-    , interest : Int
-    , skill : Int
-    }
-
-
-azure : WorkExperience
-azure =
-    { org = "Microsoft Azure AI (via AmplifyCP)"
-    , feature = True
-    , role = "Lead UX/UI Software Engineer"
-    , date = "May 2021 - July 2021"
-    , description = "Leading developers, designers and data engineers in Europe, India, South America, NZ, and US across several projects to showcase demos of Microsoft Azure AI technology to solve real-world problems for different sects of industry."
-    , accomplishments =
-        [ "Refactored five React apps into a single TOML configurable app"
-        , "Wrote automated scripts to speed up development pain-points"
-        , "Performance optimized Azure Media and Power BI embeds"
-        , "Removed redundant or broken code with reusable abstractions"
-        , "Managed deployment and production environments"
-        , "Set scope and priorities for multiple international teams"
-        , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
-        ]
-    , tech = [ "React", "Redux", "TOML", "TypeScript" ]
-    }
-
-
-emma : WorkExperience
-emma =
-    { org = "AmplifyCP"
-    , feature = True
-    , role = "Lead Full-stack Software Engineer"
-    , date = "March 2021 - Present"
-    , description = "An internal project at AmplifyCP, Emma is a web application and mobile app that helps parents that have children with congenital CMV monitor, track, and make recommendations based on medical and behavioral interventions."
-    , accomplishments =
-        [ "Designed and implemented full-stack architecture"
-        , "Created Collaboration Documents for PMs, Designers, and Engineers through Miro"
-        , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
-        ]
-    , tech = [ "Express.js", "MongoDB", "Mongoose", "React", "Redux", "TypeScript" ]
-    }
-
-
-pot : WorkExperience
-pot =
-    { org = "Port of Tacoma (via AmplifyCP)"
-    , feature = True
-    , role = "Lead Full-stack Software Engineer"
-    , date = "March 2021 - Present"
-    , description = "Overhauling and updating various services for the Port of Tacoma, including new solutions that integrate with legacy APIs."
-    , accomplishments =
-        [ "Building and maintaining Express servers to replace outdated legacy services in their data pipeline"
-        , "Designed Socket.io architecture for real-time data requirements"
-        , "Created performance dashboards for new APIs with React"
-        , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
-        ]
-    , tech = [ "React", "JavaScript", "Socket.io", "SQL Server" ]
-    }
-
-
-playboy : WorkExperience
-playboy =
-    { org = "Playboy Group, Inc. (via AmplifyCP)"
-    , feature = False
-    , role = "Software Engineer"
-    , date = "May 2021 - May 2021"
-    , description = "Worked for Playboy company acquisition, TLA, to create automated scripts to handle data migration needs."
-    , accomplishments =
-        [ "Created Python scripts to run nightly data migrations from an on-premise server into Snowflake to enable data viz"
-        , "Collaborated with Data Viz specialists to solve roadblocks"
-        ]
-    , tech = [ "Python", "Pandas", "Snowflake", "SQL Server" ]
-    }
-
-
-colorado : WorkExperience
-colorado =
-    { org = "Colorado Community College System (via AmplifyCP)"
-    , feature = True
-    , role = "Full-stack Software Engineer"
-    , date = "August 2019 - Present"
-    , description = "Ongoing project that replaced five 15+ year-old web applications with a single, cloud-based, solution."
-    , accomplishments =
-        [ "Built reusable React components in Typescript"
-        , "Built tests with React Testing-Library and Enzyme"
-        , "Developed standards for React, Redux and SASS architecture"
-        , "Built controllers and endpoints with C# and ASP.net Core"
-        , "Wrote SQL Queries for reporting and data collection features"
-        , "Created open-source solutions for technical requirements"
-        , "Provided ongoing support and feature work"
-        , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
-        ]
-    , tech = [ "React", "TypeScript", "Redux", "SASS", "C#", "SQL Server", "ASP.Net Core", "Entity Framework" ]
-    }
-
-
-graphAPI : WorkExperience
-graphAPI =
-    { org = "Microsoft Graph Security API (via AmplifyCP)"
-    , feature = False
-    , role = "Technical Program Manager"
-    , date = "August 2019 - August 2019"
-    , description = "Creating and updating example solutions and documentation for Microsoft Graph API integrations with various security related systems."
-    , accomplishments =
-        [ "Wrote implementations in C#, Python, and JavaScript"
-        , "Liason between customers and community and dev team"
-        , "Maintained public-facing documentation on GitHub"
-        , "Partnered with business and technical teammates on requirements, design, and technical delivery of solutions"
-        ]
-    , tech = [ "React", "TypeScript", "Redux", "SASS", "C#", "SQL Server", "ASP.Net Core", "Entity Framework" ]
-    }
-
-
-roles : List WorkExperience
-roles =
-    [ azure
-    , playboy
-    , emma
-    , pot
-    , colorado
-    , graphAPI
-    ]
-
-
-skills : List String
-skills =
-    [ "Software Architecture"
-    , "Functional Programming"
-    , "Accessibility . UX Design"
-    , "Dynamic Styling . Animations"
-    , "Data Validation . Authentication"
-    , "REST . GraphQL . WebSockets"
-    , "Data Access Layers . Microservices"
-    , "Public Speaking . Mentoring"
-    ]
-
-
-frontEnd : List String
-frontEnd =
-    [ "Angular.io"
-    , "Apollo Client"
-    , "BEM"
-    , "Canvas Animation"
-    , "CSS"
-    , "ES6"
-    , "HTML"
-    , "React "
-    , "React Native"
-    , "Redux"
-    , "SASS (.scss)"
-    , "Socket.io"
-    , "SVG Animation"
-    , "Webpack"
-    ]
-
-
-backEnd : List String
-backEnd =
-    [ "ASP.Net Core"
-    , "Apollo Server"
-    , "CosmoDB"
-    , "Dapper"
-    , "Django"
-    , "Entity Framework"
-    , "Express.js"
-    , "Flask"
-    , "MongoDB"
-    , "Mongoose.js"
-    , "MySQL"
-    , "Node.js"
-    , "OAuth"
-    , "Redis"
-    , "SQL Server"
-    , "SQLite"
-    ]
-
-
-testing : List String
-testing =
-    [ "Cypress"
-    , "DocTest"
-    , "Enzyme"
-    , "Istanbul"
-    , "Jest"
-    , "Mocha"
-    , "PyTest"
-    , "Python unittest"
-    , "React Testing Library"
-    , "Selenium"
-    , "xUnit"
-    ]
-
-
-devtools : List String
-devtools =
-    [ "Automation"
-    , "AWS Cloud"
-    , "Azure Cloud"
-    , "Azure DevOps"
-    , "Bash Scripting"
-    , "Docker"
-    , "Git"
-    , "GitHub"
-    , "Linux"
-    , "Miro"
-    , "VIM"
-    ]
-
-
-tools : List String
-tools =
-    [ "ASP.Net Core"
-    , "Angular.io"
-    , "CosmoDB"
-    , "Dapper"
-    , "Docker"
-    , "Entity Framework"
-    , "Express.js"
-    , "Flask"
-    , "Git"
-    , "JWT"
-    , "Linux"
-    , "MSSql Server"
-    , "MongoDB"
-    , "Mongoose"
-    , "MySQL"
-    , "Node"
-    , "OAuth"
-    , "React.js"
-    , "Redis"
-    , "Redux"
-    , "Socket.io"
-    , "VIM"
-    ]
-
-
-csharp : Language
-csharp =
-    { label = "C#"
-    , interest = 2
-    , skill = 8
-    }
-
-
-clisp : Language
-clisp =
-    { label = "Common Lisp"
-    , interest = 10
-    , skill = 6
-    }
-
-
-elm : Language
-elm =
-    { label = "Elm"
-    , interest = 10
-    , skill = 6
-    }
-
-
-fsharp : Language
-fsharp =
-    { label = "F#"
-    , interest = 9
-    , skill = 3
-    }
-
-
-javascript : Language
-javascript =
-    { label = "JavaScript"
-    , interest = 10
-    , skill = 10
-    }
-
-
-python : Language
-python =
-    { label = "Python"
-    , interest = 8
-    , skill = 9
-    }
-
-
-rust : Language
-rust =
-    { label = "Rust"
-    , interest = 10
-    , skill = 5
-    }
-
-
-scala : Language
-scala =
-    { label = "Scala"
-    , interest = 6
-    , skill = 5
-    }
-
-
-typescript : Language
-typescript =
-    { label = "TypeScript"
-    , interest = 8
-    , skill = 8
-    }
-
-
-languages : List Language
-languages =
-    [ csharp
-    , clisp
-    , elm
-    , fsharp
-    , javascript
-    , python
-    , rust
-    , scala
-    , typescript
-    ]
-
-
-
--- [ HTML snippets ]
--- [ img [ class "header__logo", src "http://prescottbreeden.com/static/media/p_logo5.e5530b58.png" ] []
-
-
 linkedInIcon =
     [ "M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z" ]
 
@@ -375,11 +39,20 @@ envelopIcon =
     [ "M29 4h-26c-1.65 0-3 1.35-3 3v20c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-20c0-1.65-1.35-3-3-3zM12.461 17.199l-8.461 6.59v-15.676l8.461 9.086zM5.512 8h20.976l-10.488 7.875-10.488-7.875zM12.79 17.553l3.21 3.447 3.21-3.447 6.58 8.447h-19.579l6.58-8.447zM19.539 17.199l8.461-9.086v15.676l-8.461-6.59z" ]
 
 
+cogIcon =
+    [ "M29.181 19.070c-1.679-2.908-0.669-6.634 2.255-8.328l-3.145-5.447c-0.898 0.527-1.943 0.829-3.058 0.829-3.361 0-6.085-2.742-6.085-6.125h-6.289c0.008 1.044-0.252 2.103-0.811 3.070-1.679 2.908-5.411 3.897-8.339 2.211l-3.144 5.447c0.905 0.515 1.689 1.268 2.246 2.234 1.676 2.903 0.672 6.623-2.241 8.319l3.145 5.447c0.895-0.522 1.935-0.82 3.044-0.82 3.35 0 6.067 2.725 6.084 6.092h6.289c-0.003-1.034 0.259-2.080 0.811-3.038 1.676-2.903 5.399-3.894 8.325-2.219l3.145-5.447c-0.899-0.515-1.678-1.266-2.232-2.226zM16 22.479c-3.578 0-6.479-2.901-6.479-6.479s2.901-6.479 6.479-6.479c3.578 0 6.479 2.901 6.479 6.479s-2.901 6.479-6.479 6.479z"
+    ]
+
+
 resumeHeader : Html Msg
 resumeHeader =
     header [ class "header" ]
         [ div [ class "page__left-col--header" ]
-            [ img [ class "header__logo", src "https://www.amplifycp.com/wp-content/uploads/2020/11/Amplify-Consulting-Partners-Logo@3x.png" ] []
+            [ img
+                [ class "header__logo"
+                , src "https://www.amplifycp.com/wp-content/uploads/2020/11/Amplify-Consulting-Partners-Logo@3x.png"
+                ]
+                []
             ]
         , div [ class "header__primary" ]
             [ h1 [ class "header__name" ] [ text "Prescott Breeden" ]
@@ -390,32 +63,39 @@ resumeHeader =
         ]
 
 
-icon : List String -> Html Msg
-icon paths =
-    Svg.svg [] (List.map (\p -> Svg.path [ Svg.Attributes.d p ] []) paths)
-
-
 contact : Html Msg
 contact =
     div [ class "box" ]
         [ p [ class "box__title" ] [ text "contact" ]
-        , p [ class "box__row" ]
-            [ span [ class "box__icon" ] [ icon envelopIcon ]
-            , span [ class "box__text" ]
+        , p [ class "box__row box__link" ]
+            [ icon "box__icon" envelopIcon
+            , a
+                [ class "box__text"
+                , style "textDecoration" "none"
+                , href "mailto:prescott@amplifycp.com"
+                ]
                 [ text "prescott@amplifycp.com"
                 ]
             ]
-        , p [ class "box__row" ]
-            [ span [ class "box__icon" ] [ icon linkedInIcon ]
-            , span [ class "box__text" ]
+        , p [ class "box__row box__link" ]
+            [ icon "box__icon" linkedInIcon
+            , a
+                [ class "box__text"
+                , style "textDecoration" "none"
+                , href "https://www.linkedin.com/in/prescottbreeden/"
+                , target "_blank"
+                , rel "noreferrer"
+                ]
                 [ text "/in/prescottbreeden"
                 ]
             ]
         ]
 
 
-
--- [ Helper Functions ]
+icon : String -> List String -> Html Msg
+icon className paths =
+    Svg.svg [ Svg.Attributes.viewBox "0 0 32 32", Svg.Attributes.class className ]
+        (List.map (\p -> Svg.path [ Svg.Attributes.d p ] []) paths)
 
 
 listItem : String -> Html Msg
@@ -427,7 +107,9 @@ details : Language -> Html Msg
 details model =
     li [ class "details" ]
         [ div
-            [ class "details__container", onClick { operation = "OPEN", data = model.label } ]
+            [ class "details__container"
+            , onClick { operation = "OPEN", data = model.label }
+            ]
             [ p [ class "details__label" ] [ text model.label ]
             , div [ class "details__data" ]
                 [ p [ class ("details__skill--" ++ String.fromInt model.skill) ] []
@@ -495,10 +177,26 @@ toolsBox model =
         , div
             [ class "tools" ]
             [ div [ class "tools__options" ]
-                [ div [ class (toolsClass FrontEnd model), onClick (setTech "FRONT_END") ] [ text "Front End" ]
-                , p [ class (toolsClass BackEnd model), onClick (setTech "BACK_END") ] [ text "Back End" ]
-                , p [ class (toolsClass Test model), onClick (setTech "TEST") ] [ text "Testing" ]
-                , p [ class (toolsClass Tools model), onClick (setTech "TOOLS") ] [ text "Dev Tools" ]
+                [ div
+                    [ class (toolsClass FrontEnd model)
+                    , onClick (setTech "FRONT_END")
+                    ]
+                    [ text "Front End" ]
+                , p
+                    [ class (toolsClass BackEnd model)
+                    , onClick (setTech "BACK_END")
+                    ]
+                    [ text "Back End" ]
+                , p
+                    [ class (toolsClass Test model)
+                    , onClick (setTech "TEST")
+                    ]
+                    [ text "Testing" ]
+                , p
+                    [ class (toolsClass Tools model)
+                    , onClick (setTech "TOOLS")
+                    ]
+                    [ text "Dev Tools" ]
                 ]
             , div [ class "tools__data" ]
                 (List.map (\s -> p [ class ("tools__item" ++ listIndex s model.tools) ] [ text s ]) frontEnd
@@ -574,6 +272,40 @@ initialModel =
     }
 
 
+navMenu : Html Msg
+navMenu =
+    div [ class "navigation" ]
+        [ input
+            [ type_ "checkbox"
+            , id "nav"
+            , class "nav__checkbox"
+            ]
+            []
+        , label
+            [ for "nav"
+            , class "nav__button"
+            ]
+            [ span [ class "nav__icon" ] [] ]
+        , div [ class "nav__background" ] []
+        , nav [ class "nav__nav" ]
+            [ ul [ class "nav__list" ]
+                [ li [ class "nav__item" ]
+                    [ icon "nav__cog" cogIcon
+                    , p [] [ text "Overview" ]
+                    ]
+                , li [ class "nav__item" ]
+                    [ icon "nav__cog " cogIcon
+                    , p [] [ text "Projects" ]
+                    ]
+                , li [ class "nav__item" ]
+                    [ icon "nav__cog " cogIcon
+                    , p [] [ text "All Experience" ]
+                    ]
+                ]
+            ]
+        ]
+
+
 view model =
     div [ class "page" ]
         [ resumeHeader
@@ -595,19 +327,7 @@ view model =
                         (List.map role (List.filter (\e -> e.feature) model.experience))
                     ]
                 ]
-            , div [ class "navigation" ]
-                [ input [ type_ "checkbox", id "nav", class "nav__checkbox" ] []
-                , label [ for "nav", class "nav__button" ]
-                    [ span [ class "nav__icon" ] [] ]
-                , div [ class "nav__background" ] []
-                , nav [ class "nav__nav" ]
-                    [ div [ class "nav__list" ]
-                        [ p [ class "nav__item" ] [ text "Overview" ]
-                        , p [ class "nav__item" ] [ text "Projects" ]
-                        , p [ class "nav__item" ] [ text "All Experience" ]
-                        ]
-                    ]
-                ]
+            , navMenu
             ]
         , footer [ class "footer" ]
             [ p [] [ text "Written in Elm" ]

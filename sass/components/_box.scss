@@ -3,20 +3,17 @@
   &:not(:last-child) {
     border-bottom: 2px solid $border-color;
   }
-
   &__title {
     letter-spacing: 1px;
     margin-bottom: 2rem;
     text-transform: uppercase;
   }
-
   &__text {
     color: #222;
     font-size: 1.8rem;
     list-style-type: none;
     padding: .5rem 0;
   }
-
   &__row {
     display: flex;
     justify-content: flex-start;
@@ -26,6 +23,16 @@
     height: 3rem;
     width: 3rem;
     margin-right: 2rem;
+  }
+  &__link {
+    text-decoration: none;
+    transition: color .2s;
+    &:hover > * {
+      color: $amp-dark-red;
+      fill: $amp-dark-red;
+      cursor: pointer;
+      transition: all .2s;
+    }
   }
 }
 

@@ -10,17 +10,18 @@ Creating an html resume with vanilla html, js, and css is cool, but would make a
 
 ## roadmap
 
-- [ ] svg icons
+- [x] svg icons
 - [ ] language detail animations
 - [ ] dynamic modal for detail content
-- [ ] frontEnd, backEnd, databases, orms, devtools switch
+- [x] frontEnd, backEnd, databases, orms, devtools switch
 - [ ] interactive content for tools
 - [x] technical work experience
 - [ ] non-technical work experience
 - [ ] projects
-- [ ] nav menu button
-- [ ] more cloud tech
+- [x] nav menu button
+- [x] more cloud tech
 - [ ] mobile view
+- [ ] a11y (alt tags svg, keyboard controls, contrast checks)
 
 ### stretch
 

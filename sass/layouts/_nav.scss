@@ -22,7 +22,6 @@
       cursor: pointer;
     }
   }
-
   /// Nav Background that expands fullscreen
   &__background {
     position: fixed;
@@ -71,7 +70,6 @@
   &__checkbox {
     display: none;
   }
-
   /// Nav Menu
   &__nav {
     height: 100vh;
@@ -88,16 +86,23 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
     list-style: none;
     text-align: center; 
   }
   &__item {
     margin: 1rem;
     position: relative;
-    display: block;
+    display: flex;
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
   }
-
+  &__cog {
+    height: 3rem;
+    width: 3rem;
+    margin-right: 2rem;
+    // fill: $amp-blue;
+  }
   /// Expanded menu behavior
   &__checkbox:checked ~ &__background {
     -webkit-transform: scale(80);

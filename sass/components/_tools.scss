@@ -1,14 +1,12 @@
 .tools {
   margin-top: 1rem;
   display: flex;
-
   &__options {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 2rem;
     flex-direction: column;
   }
-
   &__nav {
     position: relative;
     font-size: 1.8rem;
@@ -16,7 +14,6 @@
     border-radius: 4px;
     display: flex;
     margin-bottom: 1rem;
-
     &--active::after {
       content: "";
       position: absolute;
@@ -28,7 +25,6 @@
       transform: scaleX(1);
       transition: transform .2s, background-color .1s;
     }
-
     &:hover {
       cursor: pointer;
     }
@@ -47,19 +43,16 @@
   &__nav:hover::before {
     transform: scaleY(1);
   }
-
   &__data {
     border-left: 2px solid #ccc;
     margin-left: 1rem;
     padding-left: 1rem;
   }
-
   &__item {
     display: none;
     font-size: 1.6rem;
     padding: .5rem;
   }
-
   &__appear {
     @for $i from 1 through 50 {
       &--#{$i} {
@@ -67,6 +60,7 @@
         opacity: 0;
         font-size: 1.6rem;
         animation: enter .2s ease-in #{$i * .05}s 1 forwards;
+        transition: background-color .2s;
 
         &:hover {
           background-color: rgba($amp-blue, .2);

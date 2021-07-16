@@ -2,12 +2,11 @@
   border-radius: 4px;
   list-style-type: none;
   padding: 1rem;
-
+  transition: background-color .2s;
   &:hover {
     background-color: rgba($amp-blue, .2);
     cursor: zoom-in;
   }
-
   &__container {
     align-items: center;
     display: flex;

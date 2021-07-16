@@ -162,14 +162,21 @@ $breakpoint argument choices:
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
   list-style: none;
   text-align: center;
 }
 .nav__item {
   margin: 1rem;
   position: relative;
-  display: block;
+  display: flex;
+}
+.nav__item:not(:last-child) {
+  margin-bottom: 2rem;
+}
+.nav__cog {
+  height: 3rem;
+  width: 3rem;
+  margin-right: 2rem;
 }
 .nav__checkbox:checked ~ .nav__background {
   -webkit-transform: scale(80);
@@ -277,11 +284,22 @@ $breakpoint argument choices:
   width: 3rem;
   margin-right: 2rem;
 }
+.box__link {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.box__link:hover > * {
+  color: #cc0100;
+  fill: #cc0100;
+  cursor: pointer;
+  transition: all 0.2s;
+}
 
 .details {
   border-radius: 4px;
   list-style-type: none;
   padding: 1rem;
+  transition: background-color 0.2s;
 }
 .details:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -549,6 +567,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.05s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--1:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -559,6 +578,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.1s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--2:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -569,6 +589,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.15s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--3:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -579,6 +600,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.2s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--4:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -589,6 +611,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.25s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--5:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -599,6 +622,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.3s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--6:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -609,6 +633,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.35s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--7:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -619,6 +644,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.4s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--8:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -629,6 +655,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.45s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--9:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -639,6 +666,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.5s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--10:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -649,6 +677,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.55s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--11:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -659,6 +688,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.6s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--12:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -669,6 +699,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.65s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--13:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -679,6 +710,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.7s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--14:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -689,6 +721,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.75s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--15:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -699,6 +732,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.8s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--16:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -709,6 +743,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.85s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--17:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -719,6 +754,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.9s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--18:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -729,6 +765,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 0.95s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--19:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -739,6 +776,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--20:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -749,6 +787,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.05s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--21:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -759,6 +798,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.1s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--22:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -769,6 +809,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.15s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--23:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -779,6 +820,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.2s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--24:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -789,6 +831,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.25s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--25:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -799,6 +842,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.3s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--26:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -809,6 +853,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.35s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--27:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -819,6 +864,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.4s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--28:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -829,6 +875,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.45s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--29:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -839,6 +886,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.5s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--30:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -849,6 +897,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.55s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--31:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -859,6 +908,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.6s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--32:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -869,6 +919,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.65s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--33:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -879,6 +930,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.7s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--34:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -889,6 +941,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.75s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--35:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -899,6 +952,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.8s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--36:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -909,6 +963,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.85s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--37:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -919,6 +974,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.9s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--38:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -929,6 +985,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 1.95s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--39:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -939,6 +996,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--40:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -949,6 +1007,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2.05s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--41:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -959,6 +1018,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2.1s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--42:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -969,6 +1029,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2.15s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--43:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -979,6 +1040,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2.2s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--44:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -989,6 +1051,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2.25s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--45:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -999,6 +1062,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2.3s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--46:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -1009,6 +1073,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2.35s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--47:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -1019,6 +1084,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2.4s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--48:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -1029,6 +1095,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2.45s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--49:hover {
   background-color: rgba(19, 12, 64, 0.2);
@@ -1039,6 +1106,7 @@ $breakpoint argument choices:
   opacity: 0;
   font-size: 1.6rem;
   animation: enter 0.2s ease-in 2.5s 1 forwards;
+  transition: background-color 0.2s;
 }
 .tools__appear--50:hover {
   background-color: rgba(19, 12, 64, 0.2);
