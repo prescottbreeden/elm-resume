@@ -1,0 +1,124 @@
+.nav {
+  /// Nav Button
+  &__button {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    width: 7rem;
+    height: 7rem;
+    background-color: $amp-red;
+    border-radius: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    background-image: radial-gradient(
+      $amp-light-red,
+      $amp-red
+    );
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  /// Nav Background that expands fullscreen
+  &__background {
+    position: fixed;
+    top: 2.5rem;
+    right: 2.5rem;
+    height: 6rem;
+    width: 6rem;
+    border-radius: 100%;
+    background-image: radial-gradient(
+      $amp-light-red,
+      $amp-red
+    );
+    z-index: 5;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &__icon,
+  &__icon::before,
+  &__icon::after{
+    width: 3rem;
+    background-color: #eee;
+    height: .2rem;
+    display: inline-block;
+  }
+  &__icon::before,
+  &__icon::after {
+    backface-visibility: hidden;
+    content: "";
+    top: 0;
+    left: 0;
+    position: absolute;
+    transition: all .2s;
+  }
+  &__icon::before {
+    top: -1rem;
+  }
+  &__icon::after {
+    top: 1rem;
+  }
+  &__checkbox {
+    display: none;
+  }
+
+  /// Nav Menu
+  &__nav {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    z-index: 6;
+    opacity: 0;
+    width: 0;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  &__list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    list-style: none;
+    text-align: center; 
+  }
+  &__item {
+    margin: 1rem;
+    position: relative;
+    display: block;
+  }
+
+  /// Expanded menu behavior
+  &__checkbox:checked ~ &__background {
+    -webkit-transform: scale(80);
+    -ms-transform: scale(80);
+    transform: scale(80); 
+  }
+  &__checkbox:checked + &__button &__icon {
+    background-color: transparent; 
+  }
+  &__checkbox:checked + &__button &__icon::before {
+    top: 0;
+    transform: rotate(135deg); 
+  }
+  &__checkbox:checked + &__button &__icon::after {
+    top: 0;
+    transform: rotate(-135deg);
+  }
+  &__checkbox:checked ~ &__nav {
+    opacity: 1;
+    width: 100%;
+    left: 0;
+  }
+}
+

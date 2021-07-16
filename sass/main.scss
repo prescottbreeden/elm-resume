@@ -1,11 +1,14 @@
 // base
-@import './base/variables';
+@import './base/_variables';
 @import './base/animations';
-@import './base/base';
+@import './base/resets';
+@import './base/typography';
 
 // layout
-@import './layouts/header';
 @import './layouts/footer';
+@import './layouts/header';
+@import './layouts/nav';
+@import './layouts/page';
 
 // components
 @import './components/box';
@@ -13,6 +16,3 @@
 @import './components/experience';
 @import './components/legend';
 @import './components/tools';
-
-// pages
-@import './pages/page';

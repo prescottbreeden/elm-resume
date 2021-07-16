@@ -16,12 +16,211 @@
 
 html {
   background-color: #333;
+}
+
+body {
+  padding: 2rem;
+}
+
+html {
   font-size: 66.25%;
 }
 
 body {
   font-family: "Nunito Sans", sans-serif;
+}
+
+/*
+
+0-600px:    Phone
+600-900px:  Tablet Portrait
+900-1200px: Tablet Landscape
+[1200-1800] is where normal styles apply
+1800+:      Big Desktop
+
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+    @include respond(tab-land) { // width < 1200?
+        font-size: 56.25%; // 1 rem = 9px, 9/16 = 56.25%
+    }
+    @include respond(med-desktop) { // width < 1050?
+        font-size: 56.25%; // 1 rem = 9px, 9/16 = 56.25%
+    }
+    @include respond(tab-port) { // width < 900?
+        font-size: 50%; // 1 rem = 8px, 8/16 = 50%
+    }
+    @include respond(big-desktop) {
+        font-size: 75%; // 1 rem = 12px, 12/16 = 75%
+    }
+*/
+.footer {
+  color: #888;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+}
+
+.header {
+  align-items: flex-end;
+  border-bottom: 2px solid #ccc;
+  display: flex;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+.header__logo {
+  height: 10rem;
+}
+.header__primary {
+  margin-bottom: 1rem;
+}
+.header__name {
+  font-weight: 400;
+}
+.header__title {
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.nav__button {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 7rem;
+  height: 7rem;
+  background-color: #ff5655;
+  border-radius: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  background-image: radial-gradient(#ff8988, #ff5655);
+}
+.nav__button:hover {
+  cursor: pointer;
+}
+.nav__background {
+  position: fixed;
+  top: 2.5rem;
+  right: 2.5rem;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 100%;
+  background-image: radial-gradient(#ff8988, #ff5655);
+  z-index: 5;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.nav__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.nav__icon, .nav__icon::before, .nav__icon::after {
+  width: 3rem;
+  background-color: #eee;
+  height: 0.2rem;
+  display: inline-block;
+}
+.nav__icon::before, .nav__icon::after {
+  backface-visibility: hidden;
+  content: "";
+  top: 0;
+  left: 0;
+  position: absolute;
+  transition: all 0.2s;
+}
+.nav__icon::before {
+  top: -1rem;
+}
+.nav__icon::after {
+  top: 1rem;
+}
+.nav__checkbox {
+  display: none;
+}
+.nav__nav {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  z-index: 6;
+  opacity: 0;
+  width: 0;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.nav__list {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  list-style: none;
+  text-align: center;
+}
+.nav__item {
+  margin: 1rem;
+  position: relative;
+  display: block;
+}
+.nav__checkbox:checked ~ .nav__background {
+  -webkit-transform: scale(80);
+  -ms-transform: scale(80);
+  transform: scale(80);
+}
+.nav__checkbox:checked + .nav__button .nav__icon {
+  background-color: transparent;
+}
+.nav__checkbox:checked + .nav__button .nav__icon::before {
+  top: 0;
+  transform: rotate(135deg);
+}
+.nav__checkbox:checked + .nav__button .nav__icon::after {
+  top: 0;
+  transform: rotate(-135deg);
+}
+.nav__checkbox:checked ~ .nav__nav {
+  opacity: 1;
+  width: 100%;
+  left: 0;
+}
+
+.page {
+  position: relative;
+  background-color: #eee;
+  border-radius: 5px;
+  font-size: 2rem;
+  margin: 0 auto;
+  max-width: 100rem;
+  min-height: 100vh;
   padding: 2rem;
+}
+.page__layout {
+  display: flex;
+}
+.page__left-col {
+  min-width: 34%;
+  max-width: 34%;
+  padding-right: 2rem;
+  border-right: 2px solid #ccc;
+}
+.page__left-col--header {
+  width: 35%;
+  padding-right: 1rem;
+  display: flex;
+  justify-content: center;
+}
+.page__right-col {
+  padding-left: 1rem;
+  width: 60%;
 }
 
 .summary__text {
@@ -49,56 +248,6 @@ body {
 
 .open {
   display: initial;
-}
-
-.nav-menu {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  width: 5rem;
-  height: 5rem;
-  background-color: #ff5655;
-  border-radius: 100%;
-  color: white;
-  display: flex;
-  justify-content: center;
-  font-size: 4rem;
-  line-height: 4.6rem;
-  box-shadow: 0.25rem 0.25rem 3rem 1rem rgba(0, 0, 0, 0.2);
-}
-.nav-menu:hover {
-  cursor: pointer;
-}
-
-.header {
-  align-items: flex-end;
-  border-bottom: 2px solid #ccc;
-  display: flex;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-}
-.header__logo {
-  height: 10rem;
-}
-.header__primary {
-  margin-bottom: 1rem;
-}
-.header__name {
-  font-weight: 400;
-}
-.header__title {
-  font-size: 1.7rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.footer {
-  color: #888;
-  display: flex;
-  font-size: 1.5rem;
-  justify-content: center;
-  margin-top: 1.5rem;
-  padding: 1.5rem;
 }
 
 .box {
@@ -884,36 +1033,6 @@ body {
 .tools__appear--50:hover {
   background-color: rgba(19, 12, 64, 0.2);
   border-radius: 4px;
-}
-
-.page {
-  position: relative;
-  background-color: #eee;
-  border-radius: 5px;
-  font-size: 2rem;
-  margin: 0 auto;
-  max-width: 100rem;
-  min-height: 100vh;
-  padding: 2rem;
-}
-.page__layout {
-  display: flex;
-}
-.page__left-col {
-  min-width: 34%;
-  max-width: 34%;
-  padding-right: 2rem;
-  border-right: 2px solid #ccc;
-}
-.page__left-col--header {
-  width: 35%;
-  padding-right: 1rem;
-  display: flex;
-  justify-content: center;
-}
-.page__right-col {
-  padding-left: 1rem;
-  width: 60%;
 }
 
 /*# sourceMappingURL=style.css.map */
