@@ -159,7 +159,7 @@ $breakpoint argument choices:
 }
 .nav__list {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   list-style: none;
@@ -169,14 +169,39 @@ $breakpoint argument choices:
   margin: 1rem;
   position: relative;
   display: flex;
+  align-items: center;
+  backface-visibility: hidden;
 }
 .nav__item:not(:last-child) {
   margin-bottom: 2rem;
+}
+.nav__item:hover > .nav__cog {
+  transform: rotate(30deg);
+  fill: #eee;
 }
 .nav__cog {
   height: 3rem;
   width: 3rem;
   margin-right: 2rem;
+  fill: #333;
+  transition: all 0.5s;
+}
+.nav__link {
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  color: #333;
+  text-transform: uppercase;
+  background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
+  background-size: 220%;
+  transition: all 0.4s;
+  text-decoration: none;
+}
+.nav__link:hover {
+  cursor: pointer;
+  background-position: 100%;
+  color: #333;
+  transform: translateX(1rem);
 }
 .nav__checkbox:checked ~ .nav__background {
   -webkit-transform: scale(80);
@@ -277,6 +302,8 @@ $breakpoint argument choices:
 .box__row {
   display: flex;
   justify-content: flex-start;
+}
+.box__row:not(:last-child) {
   margin-bottom: 1rem;
 }
 .box__icon {
@@ -287,6 +314,9 @@ $breakpoint argument choices:
 .box__link {
   text-decoration: none;
   transition: color 0.2s;
+}
+.box__link:not(:last-child) {
+  margin-bottom: 0.6rem;
 }
 .box__link:hover > * {
   color: #cc0100;

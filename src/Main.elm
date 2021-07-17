@@ -291,15 +291,25 @@ navMenu =
             [ ul [ class "nav__list" ]
                 [ li [ class "nav__item" ]
                     [ icon "nav__cog" cogIcon
-                    , p [] [ text "Overview" ]
+                    , p [ class "nav__link" ] [ text "summary" ]
                     ]
                 , li [ class "nav__item" ]
                     [ icon "nav__cog " cogIcon
-                    , p [] [ text "Projects" ]
+                    , p [ class "nav__link" ] [ text "Projects" ]
                     ]
                 , li [ class "nav__item" ]
                     [ icon "nav__cog " cogIcon
-                    , p [] [ text "All Experience" ]
+                    , p [ class "nav__link" ] [ text "All Experience" ]
+                    ]
+                , li [ class "nav__item" ]
+                    [ icon "nav__cog " cogIcon
+                    , a
+                        [ class "nav__link"
+                        , href "http://prescottbreeden.com"
+                        , target "_blank"
+                        , rel "noreferrer"
+                        ]
+                        [ text "Visit My Website" ]
                     ]
                 ]
             ]
