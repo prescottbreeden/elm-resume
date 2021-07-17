@@ -3,32 +3,13 @@ module Main exposing (main)
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onCheck, onClick)
 import List.Extra exposing (elemIndex)
 import Svg
 import Svg.Attributes
 import Tech exposing (..)
+import Types exposing (..)
 import WorkExperience exposing (..)
-
-
-type alias Msg =
-    { operation : String
-    , data : String
-    }
-
-
-type ActiveTools
-    = FrontEnd
-    | BackEnd
-    | Test
-    | Tools
-
-
-type Views
-    = Overview
-    | Projects
-    | Technical
-    | NonTechnical
 
 
 linkedInIcon =
@@ -108,7 +89,7 @@ details model =
     li [ class "details" ]
         [ div
             [ class "details__container"
-            , onClick { operation = "OPEN", data = model.label }
+            , onClick { operation = ToggleModal, data = model.label }
             ]
             [ p [ class "details__label" ] [ text model.label ]
             , div [ class "details__data" ]
@@ -147,6 +128,10 @@ languagesBox data =
         ]
 
 
+
+-- Tools Logic
+
+
 toolsClass : ActiveTools -> Model -> String
 toolsClass thing model =
     if model.activeTools == thing then
@@ -154,10 +139,6 @@ toolsClass thing model =
 
     else
         "tools__nav"
-
-
-setTech action =
-    { operation = action, data = "" }
 
 
 listIndex x xs =
@@ -179,22 +160,22 @@ toolsBox model =
             [ div [ class "tools__options" ]
                 [ div
                     [ class (toolsClass FrontEnd model)
-                    , onClick (setTech "FRONT_END")
+                    , onClick (setTech SetFrontEnd)
                     ]
                     [ text "Front End" ]
                 , p
                     [ class (toolsClass BackEnd model)
-                    , onClick (setTech "BACK_END")
+                    , onClick (setTech SetBackEnd)
                     ]
                     [ text "Back End" ]
                 , p
                     [ class (toolsClass Test model)
-                    , onClick (setTech "TEST")
+                    , onClick (setTech SetTest)
                     ]
                     [ text "Testing" ]
                 , p
                     [ class (toolsClass Tools model)
-                    , onClick (setTech "TOOLS")
+                    , onClick (setTech SetDevTools)
                     ]
                     [ text "Dev Tools" ]
                 ]
@@ -230,78 +211,148 @@ role data =
 -- [ UPDATE VIEW AND MAIN ]
 
 
+setTech : Action -> Msg
+setTech active =
+    { operation = active, data = "" }
+
+
+toggleMenu : Msg
+toggleMenu =
+    { operation = ToggleMenu, data = "" }
+
+
+
+-- changeConent : Msg
+
+
+changeConent =
+    Nothing
+
+
 update : Msg -> Model -> Model
 update msg model =
     case msg.operation of
-        "FRONT_END" ->
-            { model | activeTools = FrontEnd, tools = frontEnd }
+        ToggleMenu ->
+            { model
+                | menu =
+                    if model.menu == True then
+                        False
 
-        "BACK_END" ->
+                    else
+                        True
+            }
+
+        ToggleModal ->
+            { model
+                | modal =
+                    if model.modal == True then
+                        False
+
+                    else
+                        True
+                , modalLanguage =
+                    case msg.data of
+                        "C#" ->
+                            csharp
+
+                        "Common Lisp" ->
+                            clisp
+
+                        "Elm" ->
+                            elm
+
+                        "F#" ->
+                            fsharp
+
+                        "JavaScript" ->
+                            javascript
+
+                        "Python" ->
+                            python
+
+                        "Rust" ->
+                            rust
+
+                        "Scala" ->
+                            scala
+
+                        "TypeScript" ->
+                            typescript
+
+                        _ ->
+                            elm
+            }
+
+        SetBackEnd ->
             { model | activeTools = BackEnd, tools = backEnd }
 
-        "TEST" ->
+        SetFrontEnd ->
+            { model | activeTools = FrontEnd, tools = frontEnd }
+
+        SetTest ->
             { model | activeTools = Test, tools = testing }
 
-        "TOOLS" ->
+        SetDevTools ->
             { model | activeTools = Tools, tools = devtools }
-
-        _ ->
-            model
-
-
-type alias Model =
-    { language : String
-    , skills : List String
-    , languages : List Language
-    , tools : List String
-    , experience : List WorkExperience
-    , activeTools : ActiveTools
-    , currentView : Views
-    }
 
 
 initialModel : Model
 initialModel =
-    { language = ""
-    , skills = skills
-    , languages = languages
-    , tools = frontEnd
-    , experience = roles
-    , activeTools = FrontEnd
+    { activeTools = FrontEnd
     , currentView = Overview
+    , experience = roles
+    , language = ""
+    , languages = languages
+    , menu = False
+    , modal = False
+    , modalLanguage = elm
+    , skills = skills
+    , tools = frontEnd
     }
 
 
-navMenu : Html Msg
-navMenu =
+navMenu : Model -> Html Msg
+navMenu model =
     div [ class "navigation" ]
         [ input
             [ type_ "checkbox"
-            , id "nav"
             , class "nav__checkbox"
+            , checked model.menu
             ]
             []
         , label
-            [ for "nav"
-            , class "nav__button"
+            [ class "nav__button"
+            , onClick toggleMenu
             ]
             [ span [ class "nav__icon" ] [] ]
         , div [ class "nav__background" ] []
         , nav [ class "nav__nav" ]
             [ ul [ class "nav__list" ]
-                [ li [ class "nav__item" ]
+                [ li [ onClick toggleMenu, class "nav__item" ]
                     [ icon "nav__cog" cogIcon
-                    , p [ class "nav__link" ] [ text "summary" ]
+                    , p
+                        [ class "nav__link"
+                        ]
+                        [ text "summary" ]
                     ]
-                , li [ class "nav__item" ]
+                , li
+                    [ onClick toggleMenu
+                    , class "nav__item"
+                    ]
                     [ icon "nav__cog " cogIcon
                     , p [ class "nav__link" ] [ text "Projects" ]
                     ]
-                , li [ class "nav__item" ]
+                , li
+                    [ onClick toggleMenu
+                    , class "nav__item"
+                    ]
                     [ icon "nav__cog " cogIcon
                     , p [ class "nav__link" ] [ text "All Experience" ]
                     ]
-                , li [ class "nav__item" ]
+                , li
+                    [ onClick toggleMenu
+                    , class "nav__item"
+                    ]
                     [ icon "nav__cog " cogIcon
                     , a
                         [ class "nav__link"
@@ -337,10 +388,44 @@ view model =
                         (List.map role (List.filter (\e -> e.feature) model.experience))
                     ]
                 ]
-            , navMenu
+            , navMenu model
             ]
         , footer [ class "footer" ]
             [ p [] [ text "Written in Elm" ]
+            ]
+        , div
+            [ class
+                ("modal"
+                    ++ (if model.modal == False then
+                            "--closed"
+
+                        else
+                            ""
+                       )
+                )
+            ]
+            [ div
+                [ class
+                    ("modal__content"
+                        ++ (if model.modal == False then
+                                "--closed"
+
+                            else
+                                ""
+                           )
+                    )
+                ]
+                [ button
+                    [ onClick { operation = ToggleModal, data = "" }
+                    , class "modal__close"
+                    ]
+                    [ text "X" ]
+                , div []
+                    [ p [] [ text model.modalLanguage.label ]
+                    , details model.modalLanguage
+                    , p [] [ text model.modalLanguage.blurb ]
+                    ]
+                ]
             ]
         ]
 

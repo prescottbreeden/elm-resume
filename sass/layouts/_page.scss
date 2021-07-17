@@ -38,15 +38,59 @@
   }
 }
 .modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50rem;
-  height: 50rem;
-  background-color: #333;
-  display: none;
-}
-.open {
-  display: initial;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.4);
+  animation: appear .4s forwards;
+  display: flex;
+  z-index: 1;
+
+  &--closed {
+    display: none;
+  }
+
+  &__close {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    border-radius: 50%;
+    height: 3.5rem;
+    width: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $amp-blue;
+    color: #eee;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+  }
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70rem;
+    height: 20rem;
+    z-index: 2;
+    background-color: #eee;
+    border-radius: 4px;
+    box-shadow: $default-box-shadow;
+    padding: 2rem;
+    display: block;
+    animation: appear .4s forwards;
+    max-width: 90%;
+    max-height: 90%;
+
+    &--closed {
+      display: none;
+    }
+  }
 }

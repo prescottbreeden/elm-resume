@@ -9,6 +9,14 @@
     transform: translateX(0);
   }
 }
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 * {
   margin: 0;
   padding: 0;
@@ -268,18 +276,55 @@ $breakpoint argument choices:
 }
 
 .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation: appear 0.4s forwards;
+  display: flex;
+  z-index: 1;
+}
+.modal--closed {
+  display: none;
+}
+.modal__close {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  border-radius: 50%;
+  height: 3.5rem;
+  width: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #130c40;
+  color: #eee;
+  border: none;
+}
+.modal__close:hover {
+  cursor: pointer;
+}
+.modal__content {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50rem;
-  height: 50rem;
-  background-color: #333;
-  display: none;
+  width: 70rem;
+  height: 20rem;
+  z-index: 2;
+  background-color: #eee;
+  border-radius: 4px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  display: block;
+  animation: appear 0.4s forwards;
+  max-width: 90%;
+  max-height: 90%;
 }
-
-.open {
-  display: initial;
+.modal__content--closed {
+  display: none;
 }
 
 .box {

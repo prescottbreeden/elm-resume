@@ -1,15 +1,6 @@
 module WorkExperience exposing (..)
 
-
-type alias WorkExperience =
-    { accomplishments : List String
-    , date : String
-    , description : String
-    , feature : Bool
-    , org : String
-    , role : String
-    , tech : List String
-    }
+import Types exposing (WorkExperience)
 
 
 azure : WorkExperience

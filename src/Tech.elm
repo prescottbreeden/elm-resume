@@ -1,11 +1,6 @@
 module Tech exposing (..)
 
-
-type alias Language =
-    { label : String
-    , interest : Int
-    , skill : Int
-    }
+import Types exposing (Language)
 
 
 skills : List String
@@ -125,6 +120,7 @@ csharp =
     { label = "C#"
     , interest = 2
     , skill = 8
+    , blurb = "While I have taught and used C# for about 5 years, it is my least favorite language and I am hoping to replace my C# workflows with F#."
     }
 
 
@@ -133,6 +129,7 @@ clisp =
     { label = "Common Lisp"
     , interest = 10
     , skill = 6
+    , blurb = "Common Lisp is a fun, brainy, and powerful language that is a phenomenal teacher, even if rarely used in production (sad panda)."
     }
 
 
@@ -141,6 +138,7 @@ elm =
     { label = "Elm"
     , interest = 10
     , skill = 6
+    , blurb = "I always get excited by an opporunity to build something in Elm."
     }
 
 
@@ -149,6 +147,7 @@ fsharp =
     { label = "F#"
     , interest = 9
     , skill = 3
+    , blurb = "I am always eager for F# opporunities. It also has one of my favorite type systems."
     }
 
 
@@ -157,6 +156,7 @@ javascript =
     { label = "JavaScript"
     , interest = 10
     , skill = 10
+    , blurb = "JavaScript has been my daily-driver for about 5 years and its lispy-ness makes it one of my favorite languages."
     }
 
 
@@ -165,6 +165,7 @@ python =
     { label = "Python"
     , interest = 8
     , skill = 9
+    , blurb = "One of the first languages I learned, I have been building and teaching in Python on and off for 8 years."
     }
 
 
@@ -172,7 +173,8 @@ rust : Language
 rust =
     { label = "Rust"
     , interest = 10
-    , skill = 5
+    , skill = 2
+    , blurb = "Rust is the newest language I've begun learning. Its performance and multi-environment use makes it a powerful tool."
     }
 
 
@@ -181,6 +183,7 @@ scala =
     { label = "Scala"
     , interest = 6
     , skill = 5
+    , blurb = "Scala was the first functional-first language I learned, and while I enjoy the language it has not had a lot of use in my workflows yet."
     }
 
 
@@ -189,6 +192,7 @@ typescript =
     { label = "TypeScript"
     , interest = 8
     , skill = 8
+    , blurb = "A favorite tool to add to a JavaScript project despite the lack of higher-kinded polymorphism."
     }
 
 
