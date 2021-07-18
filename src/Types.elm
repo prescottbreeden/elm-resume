@@ -7,6 +7,12 @@ type alias Msg =
     }
 
 
+type alias LanguageMsg =
+    { operation : Action
+    , data : Language
+    }
+
+
 type Action
     = ToggleMenu
     | ToggleModal

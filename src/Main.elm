@@ -4,25 +4,13 @@ import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onCheck, onClick)
+import Icons exposing (..)
 import List.Extra exposing (elemIndex)
 import Svg
 import Svg.Attributes
 import Tech exposing (..)
 import Types exposing (..)
 import WorkExperience exposing (..)
-
-
-linkedInIcon =
-    [ "M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z" ]
-
-
-envelopIcon =
-    [ "M29 4h-26c-1.65 0-3 1.35-3 3v20c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-20c0-1.65-1.35-3-3-3zM12.461 17.199l-8.461 6.59v-15.676l8.461 9.086zM5.512 8h20.976l-10.488 7.875-10.488-7.875zM12.79 17.553l3.21 3.447 3.21-3.447 6.58 8.447h-19.579l6.58-8.447zM19.539 17.199l8.461-9.086v15.676l-8.461-6.59z" ]
-
-
-cogIcon =
-    [ "M29.181 19.070c-1.679-2.908-0.669-6.634 2.255-8.328l-3.145-5.447c-0.898 0.527-1.943 0.829-3.058 0.829-3.361 0-6.085-2.742-6.085-6.125h-6.289c0.008 1.044-0.252 2.103-0.811 3.070-1.679 2.908-5.411 3.897-8.339 2.211l-3.144 5.447c0.905 0.515 1.689 1.268 2.246 2.234 1.676 2.903 0.672 6.623-2.241 8.319l3.145 5.447c0.895-0.522 1.935-0.82 3.044-0.82 3.35 0 6.067 2.725 6.084 6.092h6.289c-0.003-1.034 0.259-2.080 0.811-3.038 1.676-2.903 5.399-3.894 8.325-2.219l3.145-5.447c-0.899-0.515-1.678-1.266-2.232-2.226zM16 22.479c-3.578 0-6.479-2.901-6.479-6.479s2.901-6.479 6.479-6.479c3.578 0 6.479 2.901 6.479 6.479s-2.901 6.479-6.479 6.479z"
-    ]
 
 
 resumeHeader : Html Msg
@@ -85,16 +73,16 @@ listItem data =
 
 
 details : Language -> Html Msg
-details model =
+details language =
     li [ class "details" ]
         [ div
             [ class "details__container"
-            , onClick { operation = ToggleModal, data = model.label }
+            , onClick { operation = ToggleModal, data = language.label }
             ]
-            [ p [ class "details__label" ] [ text model.label ]
+            [ p [ class "details__label" ] [ text language.label ]
             , div [ class "details__data" ]
-                [ p [ class ("details__skill--" ++ String.fromInt model.skill) ] []
-                , p [ class ("details__interest--" ++ String.fromInt model.interest) ] []
+                [ p [ class ("details__skill--" ++ String.fromInt language.skill) ] []
+                , p [ class ("details__interest--" ++ String.fromInt language.interest) ] []
                 ]
             ]
         ]
@@ -124,6 +112,9 @@ languagesBox data =
                 [ div [ class "legend__color legend__color--interest" ] []
                 , p [ class "legend__text" ] [ text "Interest" ]
                 ]
+            ]
+        , div [ class "box__badge" ]
+            [ img [ src "https://www.codewars.com/users/bobross1337/badges/small" ] []
             ]
         ]
 
@@ -207,6 +198,133 @@ role data =
         ]
 
 
+lineSvg language =
+    section [ class "radial-chart" ]
+        [ div [ class "radial-chart__row" ]
+            [ p [ class "radial-chart__label radial-chart__icon--skill" ] [ text "Strength" ]
+            , icon "radial-chart__icon radial-chart__icon--power" powerIcon
+            , Svg.svg [ Svg.Attributes.class "radial-chart__svg" ]
+                [ Svg.line
+                    [ Svg.Attributes.x1 "0"
+                    , Svg.Attributes.x2 (String.fromInt (language.skill * 50))
+                    , Svg.Attributes.y1 "21"
+                    , Svg.Attributes.y2 "21"
+                    , Svg.Attributes.class "radial-chart__value"
+                    ]
+                    []
+                ]
+            ]
+        , div [ class "radial-chart__row" ]
+            [ p [ class "radial-chart__label" ] [ text "Interest" ]
+            , icon "radial-chart__icon radial-chart__icon--heart" heartIcon
+            , Svg.svg [ Svg.Attributes.class "radial-chart__svg" ]
+                [ Svg.line
+                    [ Svg.Attributes.x1 "0"
+                    , Svg.Attributes.x2 (String.fromInt (language.interest * 50))
+                    , Svg.Attributes.y1 "22"
+                    , Svg.Attributes.y2 "22"
+                    , Svg.Attributes.class "radial-chart__value--interest"
+                    ]
+                    []
+                ]
+            ]
+        ]
+
+
+modal : Model -> Html Msg
+modal model =
+    div
+        [ class
+            ("modal"
+                ++ (if model.modal == False then
+                        "--closed"
+
+                    else
+                        ""
+                   )
+            )
+        ]
+        [ div
+            [ class
+                ("modal__content"
+                    ++ (if model.modal == False then
+                            "--closed"
+
+                        else
+                            ""
+                       )
+                )
+            ]
+            [ Svg.svg
+                [ onClick { operation = ToggleModal, data = "" }
+                , Svg.Attributes.viewBox "0 0 32 32"
+                , Svg.Attributes.class "modal__close"
+                ]
+                (List.map (\p -> Svg.path [ Svg.Attributes.d p ] []) closeIcon)
+            , div [ class "modal__container" ]
+                [ p [ class "modal__title" ] [ text model.modalLanguage.label ]
+                , lineSvg model.modalLanguage
+                ]
+            ]
+        ]
+
+
+navMenu : Model -> Html Msg
+navMenu model =
+    div [ class "navigation" ]
+        [ input
+            [ type_ "checkbox"
+            , class "nav__checkbox"
+            , checked model.menu
+            ]
+            []
+        , label
+            [ class "nav__button"
+            , onClick toggleMenu
+            ]
+            [ span [ class "nav__icon" ] [] ]
+        , div [ class "nav__background" ] []
+        , nav [ class "nav__nav" ]
+            [ ul [ class "nav__list" ]
+                [ li [ onClick toggleMenu, class "nav__item" ]
+                    [ icon "nav__cog" cogIcon
+                    , p
+                        [ class "nav__link"
+                        ]
+                        [ text "summary" ]
+                    ]
+                , li
+                    [ onClick toggleMenu
+                    , class "nav__item"
+                    ]
+                    [ icon "nav__cog " cogIcon
+                    , p [ class "nav__link" ] [ text "Projects" ]
+                    ]
+                , li
+                    [ onClick toggleMenu
+                    , class "nav__item"
+                    ]
+                    [ icon "nav__cog " cogIcon
+                    , p [ class "nav__link" ] [ text "All Experience" ]
+                    ]
+                , li
+                    [ onClick toggleMenu
+                    , class "nav__item"
+                    ]
+                    [ icon "nav__cog " cogIcon
+                    , a
+                        [ class "nav__link"
+                        , href "http://prescottbreeden.com"
+                        , target "_blank"
+                        , rel "noreferrer"
+                        ]
+                        [ text "Visit My Website" ]
+                    ]
+                ]
+            ]
+        ]
+
+
 
 -- [ UPDATE VIEW AND MAIN ]
 
@@ -280,7 +398,7 @@ update msg model =
                             typescript
 
                         _ ->
-                            elm
+                            csharp
             }
 
         SetBackEnd ->
@@ -305,66 +423,10 @@ initialModel =
     , languages = languages
     , menu = False
     , modal = False
-    , modalLanguage = elm
+    , modalLanguage = javascript
     , skills = skills
     , tools = frontEnd
     }
-
-
-navMenu : Model -> Html Msg
-navMenu model =
-    div [ class "navigation" ]
-        [ input
-            [ type_ "checkbox"
-            , class "nav__checkbox"
-            , checked model.menu
-            ]
-            []
-        , label
-            [ class "nav__button"
-            , onClick toggleMenu
-            ]
-            [ span [ class "nav__icon" ] [] ]
-        , div [ class "nav__background" ] []
-        , nav [ class "nav__nav" ]
-            [ ul [ class "nav__list" ]
-                [ li [ onClick toggleMenu, class "nav__item" ]
-                    [ icon "nav__cog" cogIcon
-                    , p
-                        [ class "nav__link"
-                        ]
-                        [ text "summary" ]
-                    ]
-                , li
-                    [ onClick toggleMenu
-                    , class "nav__item"
-                    ]
-                    [ icon "nav__cog " cogIcon
-                    , p [ class "nav__link" ] [ text "Projects" ]
-                    ]
-                , li
-                    [ onClick toggleMenu
-                    , class "nav__item"
-                    ]
-                    [ icon "nav__cog " cogIcon
-                    , p [ class "nav__link" ] [ text "All Experience" ]
-                    ]
-                , li
-                    [ onClick toggleMenu
-                    , class "nav__item"
-                    ]
-                    [ icon "nav__cog " cogIcon
-                    , a
-                        [ class "nav__link"
-                        , href "http://prescottbreeden.com"
-                        , target "_blank"
-                        , rel "noreferrer"
-                        ]
-                        [ text "Visit My Website" ]
-                    ]
-                ]
-            ]
-        ]
 
 
 view model =
@@ -393,40 +455,7 @@ view model =
         , footer [ class "footer" ]
             [ p [] [ text "Written in Elm" ]
             ]
-        , div
-            [ class
-                ("modal"
-                    ++ (if model.modal == False then
-                            "--closed"
-
-                        else
-                            ""
-                       )
-                )
-            ]
-            [ div
-                [ class
-                    ("modal__content"
-                        ++ (if model.modal == False then
-                                "--closed"
-
-                            else
-                                ""
-                           )
-                    )
-                ]
-                [ button
-                    [ onClick { operation = ToggleModal, data = "" }
-                    , class "modal__close"
-                    ]
-                    [ text "X" ]
-                , div []
-                    [ p [] [ text model.modalLanguage.label ]
-                    , details model.modalLanguage
-                    , p [] [ text model.modalLanguage.blurb ]
-                    ]
-                ]
-            ]
+        , modal model
         ]
 
 
