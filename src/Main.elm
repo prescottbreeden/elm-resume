@@ -3,6 +3,7 @@ module Main exposing (main)
 import Browser
 import Components.Icon exposing (icon)
 import Constants.Icons exposing (..)
+import Constants.Projects exposing (..)
 import Constants.Tech exposing (..)
 import Constants.WorkExperience exposing (..)
 import Html exposing (..)
@@ -325,7 +326,7 @@ update msg model =
             { model | menu = False, currentView = Extended, experience = roles }
 
         ShowProjects ->
-            model
+            { model | menu = False, currentView = Projects }
 
         ShowNonTechnical ->
             { model | menu = False, currentView = NonTechnical, experience = nonTechRoles }
@@ -337,11 +338,11 @@ initialModel =
     , currentView = Experience
     , experience = highlights
     , language = ""
-    , languages = languages
+    , languages = languages -- this isn't needed
     , menu = False
     , modal = False
     , modalLanguage = javascript
-    , skills = skills
+    , skills = skills -- this isn't needed
     , tools = frontEnd
     }
 
@@ -358,10 +359,10 @@ summaryTitle model =
             "Non-Technical Experience"
 
         _ ->
-            "Projects?"
+            "Personal Projects"
 
 
-summary model =
+pageLayout model =
     div [ class "page__layout" ]
         [ div [ class "page__left-col" ]
             [ contact
@@ -374,32 +375,58 @@ summary model =
                 [ p [ class "box__title" ] [ text "TL;DR" ]
                 , p [ class "summary__text" ] [ text "Passionate full-stack software developer with eight years of programming experience. Open-source contributor and author. Believes in life-long learning and that hot-sauce is a food group." ]
                 ]
-            , div [ class "box" ]
-                [ p [ class "box__title" ] [ text (summaryTitle model) ]
-                , section [ class "experience--section" ]
-                    (List.map role model.experience)
-                ]
+            , pageSelect model
             ]
         , navMenu model
         ]
 
 
+experienceContent model =
+    section [ class "box" ]
+        [ p [ class "box__title" ] [ text (summaryTitle model) ]
+        , section [ class "experience--section" ]
+            (List.map role model.experience)
+        ]
+
+
+project : Project -> Html Msg
+project data =
+    div [ class "experience" ]
+        [ p [ class "experience__role" ] [ text data.name ]
+        , p [ class "experience__description" ] [ text data.description ]
+        , ul [ class "experience__accomplishment-list" ]
+            (List.map
+                (\a ->
+                    li [ class "experience__accomplishment-item" ]
+                        [ span [ class "experience__accomplishment-text" ] [ text a ] ]
+                )
+                data.tech
+            )
+        ]
+
+
+projectContent =
+    section [ class "box" ]
+        [ p [ class "box__title" ]
+            [ text "Personal Projects" ]
+        , div []
+            (List.map project allProjects)
+        ]
+
+
 pageSelect model =
     case model.currentView of
-        Experience ->
-            summary model
-
         Projects ->
-            summary model
+            projectContent
 
         _ ->
-            summary model
+            experienceContent model
 
 
 view model =
     div [ class "page" ]
         [ resumeHeader
-        , pageSelect model
+        , pageLayout model
         , footer [ class "footer" ]
             [ p [] [ text "Last Updated @ July 2021" ]
             , p [] [ text "Written in Elm" ]

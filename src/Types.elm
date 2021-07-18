@@ -56,6 +56,13 @@ type alias Msg =
     }
 
 
+type alias Project =
+    { name : String
+    , tech : List String
+    , description : String
+    }
+
+
 type Views
     = Experience
     | Extended
