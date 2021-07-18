@@ -74,10 +74,10 @@ $breakpoint argument choices:
     }
 */
 .footer {
-  color: #888;
+  color: #666;
   display: flex;
   font-size: 1.5rem;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 1.5rem;
   padding: 1.5rem;
 }
@@ -111,7 +111,6 @@ $breakpoint argument choices:
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  animation: appear 0.4s forwards;
   display: flex;
   z-index: 1;
 }
@@ -611,7 +610,6 @@ $breakpoint argument choices:
 .radial-chart {
   width: 100%;
   height: 100%;
-  margin-left: -1rem;
 }
 .radial-chart__icon {
   height: 2rem;
@@ -651,7 +649,7 @@ $breakpoint argument choices:
   fill: none;
   stroke: #130c40;
   stroke-width: 20;
-  animation: timer 1.5s linear forwards;
+  animation: timer 2.5s linear forwards;
 }
 .radial-chart__value--interest {
   stroke-dasharray: 500;
@@ -659,7 +657,7 @@ $breakpoint argument choices:
   fill: none;
   stroke: #ff5655;
   stroke-width: 20;
-  animation: timer 1s linear forwards;
+  animation: timer 2s linear forwards;
 }
 
 .tools {

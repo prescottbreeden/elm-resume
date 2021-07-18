@@ -1,16 +1,72 @@
 module Main exposing (main)
 
 import Browser
+import Components.Icon exposing (icon)
+import Constants.Icons exposing (..)
+import Constants.Tech exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onCheck, onClick)
-import Icons exposing (..)
+import Languages exposing (..)
 import List.Extra exposing (elemIndex)
 import Svg
 import Svg.Attributes
-import Tech exposing (..)
 import Types exposing (..)
 import WorkExperience exposing (..)
+
+
+
+-- utility functions
+
+
+listIndex x xs =
+    case elemIndex x xs of
+        Just val ->
+            " tools__appear--" ++ Debug.toString (val + 1)
+
+        Nothing ->
+            " tools__appear--0"
+
+
+setTech : Action -> Msg
+setTech active =
+    { operation = active, data = "" }
+
+
+toggleMenu : Msg
+toggleMenu =
+    { operation = ToggleMenu, data = "" }
+
+
+toolsClass : ActiveTools -> Model -> String
+toolsClass thing model =
+    if model.activeTools == thing then
+        "tools__nav tools__nav--active"
+
+    else
+        "tools__nav"
+
+
+
+-- components
+
+
+listItem : String -> Html Msg
+listItem data =
+    li [ class "box__text" ] [ text data ]
+
+
+skillsBox : List String -> Html Msg
+skillsBox data =
+    div [ class "box" ]
+        [ p [ class "box__title" ] [ text "skills" ]
+        , ul []
+            (List.map listItem data)
+        ]
+
+
+
+-- layouts
 
 
 resumeHeader : Html Msg
@@ -59,86 +115,6 @@ contact =
                 ]
             ]
         ]
-
-
-icon : String -> List String -> Html Msg
-icon className paths =
-    Svg.svg [ Svg.Attributes.viewBox "0 0 32 32", Svg.Attributes.class className ]
-        (List.map (\p -> Svg.path [ Svg.Attributes.d p ] []) paths)
-
-
-listItem : String -> Html Msg
-listItem data =
-    li [ class "box__text" ] [ text data ]
-
-
-details : Language -> Html Msg
-details language =
-    li [ class "details" ]
-        [ div
-            [ class "details__container"
-            , onClick { operation = ToggleModal, data = language.label }
-            ]
-            [ p [ class "details__label" ] [ text language.label ]
-            , div [ class "details__data" ]
-                [ p [ class ("details__skill--" ++ String.fromInt language.skill) ] []
-                , p [ class ("details__interest--" ++ String.fromInt language.interest) ] []
-                ]
-            ]
-        ]
-
-
-skillsBox : List String -> Html Msg
-skillsBox data =
-    div [ class "box" ]
-        [ p [ class "box__title" ] [ text "skills" ]
-        , ul []
-            (List.map listItem data)
-        ]
-
-
-languagesBox : List Language -> Html Msg
-languagesBox data =
-    div [ class "box" ]
-        [ p [ class "box__title" ] [ text "languages" ]
-        , ul []
-            (List.map details data)
-        , div [ class "legend" ]
-            [ div [ class "legend__key" ]
-                [ div [ class "legend__color legend__color--skill" ] []
-                , p [ class "legend__text" ] [ text "Skill" ]
-                ]
-            , div [ class "legend__key" ]
-                [ div [ class "legend__color legend__color--interest" ] []
-                , p [ class "legend__text" ] [ text "Interest" ]
-                ]
-            ]
-        , div [ class "box__badge" ]
-            [ img [ src "https://www.codewars.com/users/bobross1337/badges/small" ] []
-            ]
-        ]
-
-
-
--- Tools Logic
-
-
-toolsClass : ActiveTools -> Model -> String
-toolsClass thing model =
-    if model.activeTools == thing then
-        "tools__nav tools__nav--active"
-
-    else
-        "tools__nav"
-
-
-listIndex x xs =
-    case elemIndex x xs of
-        Just val ->
-            " tools__appear--" ++ Debug.toString (val + 1)
-
-        Nothing ->
-            " tools__appear--0"
 
 
 toolsBox : Model -> Html Msg
@@ -195,77 +171,6 @@ role data =
                 )
                 data.accomplishments
             )
-        ]
-
-
-lineSvg language =
-    section [ class "radial-chart" ]
-        [ div [ class "radial-chart__row" ]
-            [ p [ class "radial-chart__label radial-chart__icon--skill" ] [ text "Strength" ]
-            , icon "radial-chart__icon radial-chart__icon--power" powerIcon
-            , Svg.svg [ Svg.Attributes.class "radial-chart__svg" ]
-                [ Svg.line
-                    [ Svg.Attributes.x1 "0"
-                    , Svg.Attributes.x2 (String.fromInt (language.skill * 50))
-                    , Svg.Attributes.y1 "21"
-                    , Svg.Attributes.y2 "21"
-                    , Svg.Attributes.class "radial-chart__value"
-                    ]
-                    []
-                ]
-            ]
-        , div [ class "radial-chart__row" ]
-            [ p [ class "radial-chart__label" ] [ text "Interest" ]
-            , icon "radial-chart__icon radial-chart__icon--heart" heartIcon
-            , Svg.svg [ Svg.Attributes.class "radial-chart__svg" ]
-                [ Svg.line
-                    [ Svg.Attributes.x1 "0"
-                    , Svg.Attributes.x2 (String.fromInt (language.interest * 50))
-                    , Svg.Attributes.y1 "22"
-                    , Svg.Attributes.y2 "22"
-                    , Svg.Attributes.class "radial-chart__value--interest"
-                    ]
-                    []
-                ]
-            ]
-        ]
-
-
-modal : Model -> Html Msg
-modal model =
-    div
-        [ class
-            ("modal"
-                ++ (if model.modal == False then
-                        "--closed"
-
-                    else
-                        ""
-                   )
-            )
-        ]
-        [ div
-            [ class
-                ("modal__content"
-                    ++ (if model.modal == False then
-                            "--closed"
-
-                        else
-                            ""
-                       )
-                )
-            ]
-            [ Svg.svg
-                [ onClick { operation = ToggleModal, data = "" }
-                , Svg.Attributes.viewBox "0 0 32 32"
-                , Svg.Attributes.class "modal__close"
-                ]
-                (List.map (\p -> Svg.path [ Svg.Attributes.d p ] []) closeIcon)
-            , div [ class "modal__container" ]
-                [ p [ class "modal__title" ] [ text model.modalLanguage.label ]
-                , lineSvg model.modalLanguage
-                ]
-            ]
         ]
 
 
@@ -327,19 +232,6 @@ navMenu model =
 
 
 -- [ UPDATE VIEW AND MAIN ]
-
-
-setTech : Action -> Msg
-setTech active =
-    { operation = active, data = "" }
-
-
-toggleMenu : Msg
-toggleMenu =
-    { operation = ToggleMenu, data = "" }
-
-
-
 -- changeConent : Msg
 
 
@@ -417,7 +309,7 @@ update msg model =
 initialModel : Model
 initialModel =
     { activeTools = FrontEnd
-    , currentView = Overview
+    , currentView = Experience
     , experience = roles
     , language = ""
     , languages = languages
@@ -429,31 +321,48 @@ initialModel =
     }
 
 
+summary model =
+    div [ class "page__layout" ]
+        [ div [ class "page__left-col" ]
+            [ contact
+            , skillsBox model.skills
+            , languagesBox model.languages
+            , toolsBox model
+            ]
+        , div [ class "page__right-col" ]
+            [ div [ class "box" ]
+                [ p [ class "box__title" ] [ text "TL;DR" ]
+                , p [ class "summary__text" ] [ text "Passionate full-stack software developer with eight years of programming experience. Open-source contributor and author. Believes in life-long learning and that hot-sauce is a food group." ]
+                ]
+            , div [ class "box" ]
+                [ p [ class "box__title" ] [ text "Technical Work Experience" ]
+                , section [ class "experience--section" ]
+                    (List.map role (List.filter (\e -> e.feature) model.experience))
+                ]
+            ]
+        , navMenu model
+        ]
+
+
+pageSelect model =
+    case model.currentView of
+        Experience ->
+            summary model
+
+        Projects ->
+            summary model
+
+        _ ->
+            summary model
+
+
 view model =
     div [ class "page" ]
         [ resumeHeader
-        , div [ class "page__layout" ]
-            [ div [ class "page__left-col" ]
-                [ contact
-                , skillsBox model.skills
-                , languagesBox model.languages
-                , toolsBox model
-                ]
-            , div [ class "page__right-col" ]
-                [ div [ class "box" ]
-                    [ p [ class "box__title" ] [ text "TL;DR" ]
-                    , p [ class "summary__text" ] [ text "Passionate full-stack software developer with eight years of programming experience. Open-source contributor and author. Believes in life-long learning and that hot-sauce is a food group." ]
-                    ]
-                , div [ class "box" ]
-                    [ p [ class "box__title" ] [ text "Technical Work Experience" ]
-                    , section [ class "experience--section" ]
-                        (List.map role (List.filter (\e -> e.feature) model.experience))
-                    ]
-                ]
-            , navMenu model
-            ]
+        , pageSelect model
         , footer [ class "footer" ]
-            [ p [] [ text "Written in Elm" ]
+            [ p [] [ text "Last Updated @ July 2021" ]
+            , p [] [ text "Written in Elm" ]
             ]
         , modal model
         ]

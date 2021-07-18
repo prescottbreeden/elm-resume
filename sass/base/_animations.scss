@@ -8,7 +8,6 @@
     transform: translateX(0);
   }
 }
-
 @keyframes appear {
   from {
     opacity: 0;
@@ -17,8 +16,6 @@
     opacity: 1;
   }
 }
-
-
 @keyframes timer {
   from {
     stroke-dashoffset: 500;

@@ -1,18 +1,6 @@
 module Types exposing (..)
 
 
-type alias Msg =
-    { operation : Action
-    , data : String
-    }
-
-
-type alias LanguageMsg =
-    { operation : Action
-    , data : Language
-    }
-
-
 type Action
     = ToggleMenu
     | ToggleModal
@@ -29,18 +17,25 @@ type ActiveTools
     | Tools
 
 
-type Views
-    = Overview
-    | Projects
-    | Technical
-    | NonTechnical
+type alias Language =
+    { label : String
+    , interest : Int
+    , skill : Int
+    , blurb : String
+    }
+
+
+type alias LanguageMsg =
+    { operation : Action
+    , data : Language
+    }
 
 
 type alias Model =
     { activeTools : ActiveTools
-    , language : String
     , currentView : Views
     , experience : List WorkExperience
+    , language : String
     , languages : List Language
     , menu : Bool
     , modal : Bool
@@ -48,6 +43,18 @@ type alias Model =
     , skills : List String
     , tools : List String
     }
+
+
+type alias Msg =
+    { operation : Action
+    , data : String
+    }
+
+
+type Views
+    = Experience
+    | Projects
+    | Technical
 
 
 type alias WorkExperience =
@@ -58,12 +65,4 @@ type alias WorkExperience =
     , org : String
     , role : String
     , tech : List String
-    }
-
-
-type alias Language =
-    { label : String
-    , interest : Int
-    , skill : Int
-    , blurb : String
     }

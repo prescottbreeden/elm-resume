@@ -1,4 +1,4 @@
-module Icons exposing (..)
+module Constants.Icons exposing (..)
 
 
 linkedInIcon =

@@ -5,14 +5,12 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0,0,0,.4);
-  animation: appear .4s forwards;
+  // animation: appear .4s forwards;
   display: flex;
   z-index: 1;
-
   &--closed {
     display: none;
   }
-
   &__close {
     position: absolute;
     top: -.5rem;
@@ -31,18 +29,15 @@
     border: none;
     box-shadow: $default-box-shadow;
     transition: all .2s;
-
     &:hover {
       cursor: pointer;
       stroke: $amp-red;
       background-color: $amp-red;
     }
-
   }
   &__title {
     margin-bottom: 1.6rem;
   }
-
   &__content {
     position: absolute;
     top: 50%;
@@ -59,7 +54,6 @@
     animation: appear .2s forwards;
     max-width: 90%;
     max-height: 90%;
-
     &--closed {
       display: none;
     }

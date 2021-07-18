@@ -1,4 +1,4 @@
-module Tech exposing (..)
+module Constants.Tech exposing (..)
 
 import Types exposing (Language)
 

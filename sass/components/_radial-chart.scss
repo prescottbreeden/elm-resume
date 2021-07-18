@@ -1,13 +1,10 @@
 .radial-chart {
   width: 100%;
   height: 100%;
-    margin-left: -1rem;
-
   &__icon {
     height: 2rem;
     width: 2rem;
     margin: 0 1rem;
-
     &--power {
       fill: $amp-blue;
     }
@@ -15,51 +12,41 @@
       fill: $amp-red;
     }
   }
-
   &__label {
     font-size: 1.3rem;
     text-transform: uppercase;
     max-width: 7rem;
     min-width: 7rem;
     text-align: right;
-
   }
-
   &__row {
     display: flex;
     justify-content: center;
     align-items: center;
-    // margin-top: 1rem;
-    // border: 1px dashed green;
   }
   &__row:last-child > &__svg{
     border-bottom: 3px solid $amp-blue;
   }
-
   &__svg {
     width: 500px;
     max-width: 100%;
     height: 4rem;
     border-left: 3px solid $amp-blue;
-    // transform: rotate(-0.25turn);
   }
-
   &__value {
     stroke-dasharray: 500;
     stroke-linecap: square;
     fill: none;
     stroke: #130c40;
     stroke-width: 20;
-    animation: timer 1.5s linear forwards;
-
+    animation: timer 2.5s linear forwards;
     &--interest {
       stroke-dasharray: 500;
       stroke-linecap: square;
       fill: none;
       stroke: #ff5655;
       stroke-width: 20;
-      animation: timer 1s linear forwards;
+      animation: timer 2s linear forwards;
     }
   }
-
 }
