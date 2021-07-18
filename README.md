@@ -16,13 +16,12 @@ Creating an html resume with vanilla html, js, and css is cool, but would make a
 - [x] nav menu button
 - [x] svg icons
 - [x] technical work experience
-- [ ] a11y (alt tags svg, keyboard controls, contrast checks)
-- [ ] dynamic modal for detail content
-- [ ] interactive content for tools
-- [ ] language detail animations
+- [x] a11y (alt tags svg, keyboard controls, contrast checks)
+- [x] dynamic modal for detail content
+- [x] language detail animations
+- [x] non-technical work experience
+- [x] projects
 - [ ] mobile view
-- [ ] non-technical work experience
-- [ ] projects
 
 ### stretch
 
