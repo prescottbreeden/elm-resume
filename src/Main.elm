@@ -4,6 +4,7 @@ import Browser
 import Components.Icon exposing (icon)
 import Constants.Icons exposing (..)
 import Constants.Tech exposing (..)
+import Constants.WorkExperience exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onCheck, onClick)
@@ -12,7 +13,6 @@ import List.Extra exposing (elemIndex)
 import Svg
 import Svg.Attributes
 import Types exposing (..)
-import WorkExperience exposing (..)
 
 
 
@@ -45,6 +45,15 @@ toolsClass thing model =
 
     else
         "tools__nav"
+
+
+navItemClass : Views -> Model -> String
+navItemClass page model =
+    if model.currentView == page then
+        "nav__item nav__item--active"
+
+    else
+        "nav__item"
 
 
 
@@ -127,22 +136,22 @@ toolsBox model =
             [ div [ class "tools__options" ]
                 [ div
                     [ class (toolsClass FrontEnd model)
-                    , onClick (setTech SetFrontEnd)
+                    , onClick (setTech ShowFrontEnd)
                     ]
                     [ text "Front End" ]
                 , p
                     [ class (toolsClass BackEnd model)
-                    , onClick (setTech SetBackEnd)
+                    , onClick (setTech ShowBackEnd)
                     ]
                     [ text "Back End" ]
                 , p
                     [ class (toolsClass Test model)
-                    , onClick (setTech SetTest)
+                    , onClick (setTech ShowTest)
                     ]
                     [ text "Testing" ]
                 , p
                     [ class (toolsClass Tools model)
-                    , onClick (setTech SetDevTools)
+                    , onClick (setTech ShowDevTools)
                     ]
                     [ text "Dev Tools" ]
                 ]
@@ -191,26 +200,36 @@ navMenu model =
         , div [ class "nav__background" ] []
         , nav [ class "nav__nav" ]
             [ ul [ class "nav__list" ]
-                [ li [ onClick toggleMenu, class "nav__item" ]
+                [ li
+                    [ onClick { operation = ShowExperience, data = "" }
+                    , class (navItemClass Experience model)
+                    ]
                     [ icon "nav__cog" cogIcon
                     , p
                         [ class "nav__link"
                         ]
-                        [ text "summary" ]
+                        [ text "Technical Experience" ]
                     ]
                 , li
-                    [ onClick toggleMenu
-                    , class "nav__item"
+                    [ onClick { operation = ShowExtended, data = "" }
+                    , class (navItemClass Extended model)
+                    ]
+                    [ icon "nav__cog " cogIcon
+                    , p [ class "nav__link" ] [ text "Extended Experience" ]
+                    ]
+                , li
+                    [ onClick { operation = ShowProjects, data = "" }
+                    , class (navItemClass Projects model)
                     ]
                     [ icon "nav__cog " cogIcon
                     , p [ class "nav__link" ] [ text "Projects" ]
                     ]
                 , li
-                    [ onClick toggleMenu
-                    , class "nav__item"
+                    [ onClick { operation = ShowNonTechnical, data = "" }
+                    , class (navItemClass NonTechnical model)
                     ]
                     [ icon "nav__cog " cogIcon
-                    , p [ class "nav__link" ] [ text "All Experience" ]
+                    , p [ class "nav__link" ] [ text "Non-Technical Experience" ]
                     ]
                 , li
                     [ onClick toggleMenu
@@ -232,11 +251,6 @@ navMenu model =
 
 
 -- [ UPDATE VIEW AND MAIN ]
--- changeConent : Msg
-
-
-changeConent =
-    Nothing
 
 
 update : Msg -> Model -> Model
@@ -244,7 +258,8 @@ update msg model =
     case msg.operation of
         ToggleMenu ->
             { model
-                | menu =
+                | modal = False
+                , menu =
                     if model.menu == True then
                         False
 
@@ -252,14 +267,12 @@ update msg model =
                         True
             }
 
-        ToggleModal ->
-            { model
-                | modal =
-                    if model.modal == True then
-                        False
+        CloseModal ->
+            { model | modal = False }
 
-                    else
-                        True
+        OpenLanguageDetails ->
+            { model
+                | modal = True
                 , modalLanguage =
                     case msg.data of
                         "C#" ->
@@ -293,24 +306,36 @@ update msg model =
                             csharp
             }
 
-        SetBackEnd ->
+        ShowBackEnd ->
             { model | activeTools = BackEnd, tools = backEnd }
 
-        SetFrontEnd ->
+        ShowFrontEnd ->
             { model | activeTools = FrontEnd, tools = frontEnd }
 
-        SetTest ->
+        ShowTest ->
             { model | activeTools = Test, tools = testing }
 
-        SetDevTools ->
+        ShowDevTools ->
             { model | activeTools = Tools, tools = devtools }
+
+        ShowExperience ->
+            { model | menu = False, currentView = Experience, experience = highlights }
+
+        ShowExtended ->
+            { model | menu = False, currentView = Extended, experience = roles }
+
+        ShowProjects ->
+            model
+
+        ShowNonTechnical ->
+            { model | menu = False, currentView = NonTechnical, experience = nonTechRoles }
 
 
 initialModel : Model
 initialModel =
     { activeTools = FrontEnd
     , currentView = Experience
-    , experience = roles
+    , experience = highlights
     , language = ""
     , languages = languages
     , menu = False
@@ -319,6 +344,21 @@ initialModel =
     , skills = skills
     , tools = frontEnd
     }
+
+
+summaryTitle model =
+    case model.currentView of
+        Experience ->
+            "Technical Experience"
+
+        Extended ->
+            "Technical Experience (Extended)"
+
+        NonTechnical ->
+            "Non-Technical Experience"
+
+        _ ->
+            "Projects?"
 
 
 summary model =
@@ -335,9 +375,9 @@ summary model =
                 , p [ class "summary__text" ] [ text "Passionate full-stack software developer with eight years of programming experience. Open-source contributor and author. Believes in life-long learning and that hot-sauce is a food group." ]
                 ]
             , div [ class "box" ]
-                [ p [ class "box__title" ] [ text "Technical Work Experience" ]
+                [ p [ class "box__title" ] [ text (summaryTitle model) ]
                 , section [ class "experience--section" ]
-                    (List.map role (List.filter (\e -> e.feature) model.experience))
+                    (List.map role model.experience)
                 ]
             ]
         , navMenu model

@@ -97,10 +97,23 @@
     &:not(:last-child) {
       margin-bottom: 2rem;
     }
+    &--active {
+      fill: #eee;
+    }
   }
   &__item:hover > &__cog {
     transform: rotate(30deg);
     fill: #eee;
+  }
+  &__item--active > &__cog {
+    transform: rotate(30deg);
+    fill: #eee;
+  }
+  &__item--active > &__link {
+    cursor: pointer;
+    background-position: 100%;
+    color: #333;
+    transform: translateX(1rem);
   }
   &__cog {
     height: 3rem;

@@ -11,11 +11,11 @@ import Types exposing (..)
 
 
 languagesBox : List Language -> Html Msg
-languagesBox data =
+languagesBox languages =
     div [ class "box" ]
         [ p [ class "box__title" ] [ text "languages" ]
         , ul []
-            (List.map details data)
+            (List.map details languages)
         , div [ class "legend" ]
             [ div [ class "legend__key" ]
                 [ div [ class "legend__color legend__color--skill" ] []
@@ -35,10 +35,12 @@ languagesBox data =
 
 details : Language -> Html Msg
 details language =
-    li [ class "details" ]
+    li
+        [ class "details"
+        , onClick { operation = OpenLanguageDetails, data = language.label }
+        ]
         [ div
             [ class "details__container"
-            , onClick { operation = ToggleModal, data = language.label }
             ]
             [ p [ class "details__label" ] [ text language.label ]
             , div [ class "details__data" ]
@@ -50,31 +52,31 @@ details language =
 
 
 lineSvg language =
-    section [ class "radial-chart" ]
-        [ div [ class "radial-chart__row" ]
-            [ p [ class "radial-chart__label radial-chart__icon--skill" ] [ text "Strength" ]
-            , icon "radial-chart__icon radial-chart__icon--power" powerIcon
-            , Svg.svg [ Svg.Attributes.class "radial-chart__svg" ]
+    section [ class "chart" ]
+        [ div [ class "chart__row" ]
+            [ p [ class "chart__label chart__icon--skill" ] [ text "Strength" ]
+            , icon "chart__icon chart__icon--power" powerIcon
+            , Svg.svg [ Svg.Attributes.class "chart__svg" ]
                 [ Svg.line
                     [ Svg.Attributes.x1 "0"
                     , Svg.Attributes.x2 (String.fromInt (language.skill * 50))
                     , Svg.Attributes.y1 "21"
                     , Svg.Attributes.y2 "21"
-                    , Svg.Attributes.class "radial-chart__value"
+                    , Svg.Attributes.class "chart__value"
                     ]
                     []
                 ]
             ]
-        , div [ class "radial-chart__row" ]
-            [ p [ class "radial-chart__label" ] [ text "Interest" ]
-            , icon "radial-chart__icon radial-chart__icon--heart" heartIcon
-            , Svg.svg [ Svg.Attributes.class "radial-chart__svg" ]
+        , div [ class "chart__row" ]
+            [ p [ class "chart__label" ] [ text "Interest" ]
+            , icon "chart__icon chart__icon--heart" heartIcon
+            , Svg.svg [ Svg.Attributes.class "chart__svg" ]
                 [ Svg.line
                     [ Svg.Attributes.x1 "0"
                     , Svg.Attributes.x2 (String.fromInt (language.interest * 50))
                     , Svg.Attributes.y1 "22"
                     , Svg.Attributes.y2 "22"
-                    , Svg.Attributes.class "radial-chart__value--interest"
+                    , Svg.Attributes.class "chart__value--interest"
                     ]
                     []
                 ]
@@ -107,7 +109,7 @@ modal model =
                 )
             ]
             [ Svg.svg
-                [ onClick { operation = ToggleModal, data = "" }
+                [ onClick { operation = CloseModal, data = "" }
                 , Svg.Attributes.viewBox "0 0 32 32"
                 , Svg.Attributes.class "modal__close"
                 ]
@@ -115,6 +117,7 @@ modal model =
             , div [ class "modal__container" ]
                 [ p [ class "modal__title" ] [ text model.modalLanguage.label ]
                 , lineSvg model.modalLanguage
+                , p [ class "modal__footer" ] [ text model.modalLanguage.blurb ]
                 ]
             ]
         ]

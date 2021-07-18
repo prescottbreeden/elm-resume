@@ -2,12 +2,17 @@ module Types exposing (..)
 
 
 type Action
-    = ToggleMenu
-    | ToggleModal
-    | SetBackEnd
-    | SetFrontEnd
-    | SetTest
-    | SetDevTools
+    = CloseModal
+    | ToggleMenu
+    | OpenLanguageDetails
+    | ShowBackEnd
+    | ShowFrontEnd
+    | ShowTest
+    | ShowDevTools
+    | ShowExperience
+    | ShowExtended
+    | ShowProjects
+    | ShowNonTechnical
 
 
 type ActiveTools
@@ -53,8 +58,9 @@ type alias Msg =
 
 type Views
     = Experience
+    | Extended
     | Projects
-    | Technical
+    | NonTechnical
 
 
 type alias WorkExperience =

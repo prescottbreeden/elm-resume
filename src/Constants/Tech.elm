@@ -120,7 +120,7 @@ csharp =
     { label = "C#"
     , interest = 2
     , skill = 8
-    , blurb = "While I have taught and used C# for about 5 years, it is my least favorite language and I am hoping to replace my C# workflows with F#."
+    , blurb = "While I have taught and used C# since 2016, it is not my favorite language."
     }
 
 
@@ -138,7 +138,7 @@ elm =
     { label = "Elm"
     , interest = 10
     , skill = 6
-    , blurb = "I always get excited by an opporunity to build something in Elm."
+    , blurb = "The developer experience and performance of Elm always make me excited for new opportunities."
     }
 
 
@@ -147,7 +147,7 @@ fsharp =
     { label = "F#"
     , interest = 9
     , skill = 3
-    , blurb = "I am always eager for F# opporunities. It also has one of my favorite type systems."
+    , blurb = "I am always eager for F# opporunities as the type-system leads itself favorably to projects in search of DDD."
     }
 
 
@@ -156,7 +156,7 @@ javascript =
     { label = "JavaScript"
     , interest = 10
     , skill = 10
-    , blurb = "JavaScript has been my daily-driver for about 5 years and its lispy-ness makes it one of my favorite languages."
+    , blurb = "JavaScript has been my daily-driver since 2016 and its lispy-ness makes it one of my favorite languages."
     }
 
 
@@ -165,7 +165,7 @@ python =
     { label = "Python"
     , interest = 8
     , skill = 9
-    , blurb = "One of the first languages I learned, I have been building and teaching in Python on and off for 8 years."
+    , blurb = "One of the first languages I learned, I have been building and teaching in Python on and off since 2013."
     }
 
 

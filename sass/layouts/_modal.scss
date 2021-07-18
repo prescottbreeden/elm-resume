@@ -5,7 +5,6 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0,0,0,.4);
-  // animation: appear .4s forwards;
   display: flex;
   z-index: 1;
   &--closed {
@@ -51,11 +50,14 @@
     padding: 2rem;
     padding-bottom: 4rem;
     display: block;
-    animation: appear .2s forwards;
     max-width: 90%;
     max-height: 90%;
     &--closed {
       display: none;
     }
+  }
+  &__footer {
+    margin-top: 2rem;
+    font-size: 1.8rem;
   }
 }

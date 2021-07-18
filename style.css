@@ -157,12 +157,15 @@ $breakpoint argument choices:
   padding: 2rem;
   padding-bottom: 4rem;
   display: block;
-  animation: appear 0.2s forwards;
   max-width: 90%;
   max-height: 90%;
 }
 .modal__content--closed {
   display: none;
+}
+.modal__footer {
+  margin-top: 2rem;
+  font-size: 1.8rem;
 }
 
 .nav__button {
@@ -252,9 +255,22 @@ $breakpoint argument choices:
 .nav__item:not(:last-child) {
   margin-bottom: 2rem;
 }
+.nav__item--active {
+  fill: #eee;
+}
 .nav__item:hover > .nav__cog {
   transform: rotate(30deg);
   fill: #eee;
+}
+.nav__item--active > .nav__cog {
+  transform: rotate(30deg);
+  fill: #eee;
+}
+.nav__item--active > .nav__link {
+  cursor: pointer;
+  background-position: 100%;
+  color: #333;
+  transform: translateX(1rem);
 }
 .nav__cog {
   height: 3rem;
@@ -394,6 +410,59 @@ $breakpoint argument choices:
 }
 .box__badge > img {
   height: 2rem;
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+}
+.chart__icon {
+  height: 2rem;
+  width: 2rem;
+  margin: 0 1rem;
+}
+.chart__icon--power {
+  fill: #130c40;
+}
+.chart__icon--heart {
+  fill: #ff5655;
+}
+.chart__label {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  max-width: 7rem;
+  min-width: 7rem;
+  text-align: right;
+}
+.chart__row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chart__row:last-child > .chart__svg {
+  border-bottom: 3px solid #130c40;
+}
+.chart__svg {
+  width: 500px;
+  max-width: 100%;
+  height: 4rem;
+  border-left: 3px solid #130c40;
+}
+.chart__value {
+  stroke-dasharray: 500;
+  stroke-linecap: square;
+  fill: none;
+  stroke: #130c40;
+  stroke-width: 20;
+  animation: timer 1.75s linear forwards;
+}
+.chart__value--interest {
+  stroke-dasharray: 500;
+  stroke-linecap: square;
+  fill: none;
+  stroke: #ff5655;
+  stroke-width: 20;
+  animation: timer 1.5s linear forwards;
 }
 
 .details {
@@ -605,59 +674,6 @@ $breakpoint argument choices:
 }
 .legend__text {
   font-size: 1.5rem;
-}
-
-.radial-chart {
-  width: 100%;
-  height: 100%;
-}
-.radial-chart__icon {
-  height: 2rem;
-  width: 2rem;
-  margin: 0 1rem;
-}
-.radial-chart__icon--power {
-  fill: #130c40;
-}
-.radial-chart__icon--heart {
-  fill: #ff5655;
-}
-.radial-chart__label {
-  font-size: 1.3rem;
-  text-transform: uppercase;
-  max-width: 7rem;
-  min-width: 7rem;
-  text-align: right;
-}
-.radial-chart__row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.radial-chart__row:last-child > .radial-chart__svg {
-  border-bottom: 3px solid #130c40;
-}
-.radial-chart__svg {
-  width: 500px;
-  max-width: 100%;
-  height: 4rem;
-  border-left: 3px solid #130c40;
-}
-.radial-chart__value {
-  stroke-dasharray: 500;
-  stroke-linecap: square;
-  fill: none;
-  stroke: #130c40;
-  stroke-width: 20;
-  animation: timer 2.5s linear forwards;
-}
-.radial-chart__value--interest {
-  stroke-dasharray: 500;
-  stroke-linecap: square;
-  fill: none;
-  stroke: #ff5655;
-  stroke-width: 20;
-  animation: timer 2s linear forwards;
 }
 
 .tools {

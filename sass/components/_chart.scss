@@ -1,4 +1,4 @@
-.radial-chart {
+.chart {
   width: 100%;
   height: 100%;
   &__icon {
@@ -39,14 +39,14 @@
     fill: none;
     stroke: #130c40;
     stroke-width: 20;
-    animation: timer 2.5s linear forwards;
+    animation: timer 1.75s linear forwards;
     &--interest {
       stroke-dasharray: 500;
       stroke-linecap: square;
       fill: none;
       stroke: #ff5655;
       stroke-width: 20;
-      animation: timer 2s linear forwards;
+      animation: timer 1.5s linear forwards;
     }
   }
 }
