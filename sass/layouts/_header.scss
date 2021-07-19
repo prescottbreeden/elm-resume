@@ -4,8 +4,14 @@
   display: flex;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
+    @include respond(phone) {
+      margin-bottom: 0rem;
+    }
   &__logo {
     height: 10rem;
+    @include respond(phone) {
+      display: none;
+    }
   }
   &__primary {
     margin-bottom: 1rem;

@@ -16,14 +16,10 @@ import Svg.Attributes
 import Types exposing (..)
 
 
-
--- utility functions
-
-
 listIndex x xs =
     case elemIndex x xs of
         Just val ->
-            " tools__appear--" ++ Debug.toString (val + 1)
+            " tools__appear--" ++ String.fromInt (val + 1)
 
         Nothing ->
             " tools__appear--0"
@@ -230,7 +226,7 @@ navMenu model =
                     , class (navItemClass NonTechnical model)
                     ]
                     [ icon "nav__cog " cogIcon
-                    , p [ class "nav__link" ] [ text "Non-Technical Experience" ]
+                    , p [ class "nav__link" ] [ text "Non-Tech Experience" ]
                     ]
                 , li
                     [ onClick toggleMenu
@@ -366,12 +362,16 @@ pageLayout model =
     div [ class "page__layout" ]
         [ div [ class "page__left-col" ]
             [ contact
+            , div [ class "box u-show-mobile" ]
+                [ p [ class "box__title" ] [ text "TL;DR" ]
+                , p [ class "summary__text" ] [ text "Passionate full-stack software developer with eight years of programming experience. Open-source contributor and author. Believes in life-long learning and that hot-sauce is a food group." ]
+                ]
             , skillsBox model.skills
             , languagesBox model.languages
             , toolsBox model
             ]
         , div [ class "page__right-col" ]
-            [ div [ class "box" ]
+            [ div [ class "box u-hide-mobile" ]
                 [ p [ class "box__title" ] [ text "TL;DR" ]
                 , p [ class "summary__text" ] [ text "Passionate full-stack software developer with eight years of programming experience. Open-source contributor and author. Believes in life-long learning and that hot-sauce is a food group." ]
                 ]

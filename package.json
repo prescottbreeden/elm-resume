@@ -4,7 +4,7 @@
     "sass": "^1.35.2"
   },
   "scripts": {
-    "start": "yarn elm-live src/Main.elm -- -- --output=main.js",
+    "start": "yarn elm-live src/Main.elm -- -- --optimize --output=main.js",
     "watch-sass": "yarn sass ./sass/main.scss ./style.css -w"
   }
 }

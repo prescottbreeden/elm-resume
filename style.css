@@ -37,6 +37,11 @@ html {
 body {
   padding: 2rem;
 }
+@media only screen and (max-width: 37.5em) {
+  body {
+    padding: 0;
+  }
+}
 
 html {
   font-size: 66.25%;
@@ -81,6 +86,22 @@ $breakpoint argument choices:
 - big-desktop
 
 */
+.u-show-mobile {
+  display: none;
+}
+@media only screen and (max-width: 37.5em) {
+  .u-show-mobile {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 37.5em) {
+  .u-hide-mobile {
+    display: none;
+  }
+}
+
 .footer {
   color: #666;
   display: flex;
@@ -88,6 +109,11 @@ $breakpoint argument choices:
   justify-content: space-between;
   margin-top: 1.5rem;
   padding: 1.5rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .footer {
+    flex-direction: column;
+  }
 }
 
 .header {
@@ -97,8 +123,18 @@ $breakpoint argument choices:
   margin-bottom: 2rem;
   padding-bottom: 1rem;
 }
+@media only screen and (max-width: 37.5em) {
+  .header {
+    margin-bottom: 0rem;
+  }
+}
 .header__logo {
   height: 10rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .header__logo {
+    display: none;
+  }
 }
 .header__primary {
   margin-bottom: 1rem;
@@ -194,6 +230,12 @@ $breakpoint argument choices:
 .nav__button:hover {
   cursor: pointer;
 }
+@media only screen and (max-width: 37.5em) {
+  .nav__button {
+    top: unset;
+    bottom: 2rem;
+  }
+}
 .nav__background {
   position: fixed;
   top: 2.5rem;
@@ -205,6 +247,12 @@ $breakpoint argument choices:
   z-index: 5;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
   transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+}
+@media only screen and (max-width: 37.5em) {
+  .nav__background {
+    top: unset;
+    bottom: 2.5rem;
+  }
 }
 .nav__icon {
   position: absolute;
@@ -245,6 +293,11 @@ $breakpoint argument choices:
   width: 0;
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+@media only screen and (max-width: 37.5em) {
+  .nav__nav {
+    width: 90%;
+  }
+}
 .nav__list {
   position: absolute;
   top: 40%;
@@ -252,6 +305,16 @@ $breakpoint argument choices:
   transform: translate(-50%, -50%);
   list-style: none;
   text-align: center;
+}
+@media only screen and (max-width: 56.75em) {
+  .nav__list {
+    width: 60%;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .nav__list {
+    width: 90%;
+  }
 }
 .nav__item {
   margin: 1rem;
@@ -304,6 +367,16 @@ $breakpoint argument choices:
   color: #333;
   transform: translateX(1rem);
 }
+@media only screen and (max-width: 56.75em) {
+  .nav__link {
+    font-size: 2.5rem;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .nav__link {
+    font-size: 2rem;
+  }
+}
 .nav__checkbox:checked ~ .nav__background {
   -webkit-transform: scale(80);
   -ms-transform: scale(80);
@@ -339,11 +412,24 @@ $breakpoint argument choices:
 .page__layout {
   display: flex;
 }
+@media only screen and (max-width: 37.5em) {
+  .page__layout {
+    flex-direction: column;
+  }
+}
 .page__left-col {
   min-width: 34%;
   max-width: 34%;
   padding-right: 2rem;
   border-right: 2px solid #ccc;
+}
+@media only screen and (max-width: 37.5em) {
+  .page__left-col {
+    max-width: 100%;
+    min-width: 100%;
+    padding-right: 0;
+    border: none;
+  }
 }
 .page__left-col--header {
   width: 35%;
@@ -351,9 +437,21 @@ $breakpoint argument choices:
   display: flex;
   justify-content: center;
 }
+@media only screen and (max-width: 37.5em) {
+  .page__left-col--header {
+    width: 0;
+    padding-right: 0;
+  }
+}
 .page__right-col {
   padding-left: 1rem;
   width: 60%;
+}
+@media only screen and (max-width: 37.5em) {
+  .page__right-col {
+    width: 100%;
+    padding-left: 0;
+  }
 }
 
 .summary__text {
@@ -373,6 +471,11 @@ $breakpoint argument choices:
 }
 .box:not(:last-child) {
   border-bottom: 2px solid #ccc;
+}
+@media only screen and (max-width: 37.5em) {
+  .box {
+    border-bottom: 2px solid #ccc;
+  }
 }
 .box__title {
   letter-spacing: 1px;

@@ -9,22 +9,39 @@
   padding: 2rem;
   &__layout {
     display: flex;
+    @include respond(phone) {
+      flex-direction: column;
+    }
   }
   &__left-col {
     min-width: 34%;
     max-width: 34%;
     padding-right: 2rem;
     border-right: 2px solid $border-color;
-  }
-  &__left-col--header {
-    width: 35%;
-    padding-right: 1rem;
-    display: flex;
-    justify-content: center;
+    @include respond(phone) {
+      max-width: 100%;
+      min-width: 100%;
+      padding-right: 0;
+      border: none;
+    }
+    &--header {
+      width: 35%;
+      padding-right: 1rem;
+      display: flex;
+      justify-content: center;
+      @include respond(phone) {
+        width: 0;
+        padding-right: 0;
+      }
+    }
   }
   &__right-col {
     padding-left: 1rem;
     width: 60%;
+    @include respond(phone) {
+      width: 100%;
+      padding-left: 0;
+    }
   }
 }
 /// TODO: find me home

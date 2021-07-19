@@ -5,4 +5,7 @@
   justify-content: space-between;
   margin-top: 1.5rem;
   padding: 1.5rem;
+  @include respond(phone) {
+    flex-direction: column;
+  }
 }
