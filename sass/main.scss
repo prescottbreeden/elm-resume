@@ -1,5 +1,8 @@
+// abstracts
+@import './abstracts/mixins';
+@import './abstracts/variables';
+
 // base
-@import './base/_variables';
 @import './base/animations';
 @import './base/resets';
 @import './base/typography';
