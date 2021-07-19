@@ -81,7 +81,7 @@ resumeHeader =
         [ div [ class "page__left-col--header" ]
             [ img
                 [ class "header__logo"
-                , src "https://www.amplifycp.com/wp-content/uploads/2020/11/Amplify-Consulting-Partners-Logo@3x.png"
+                , src "https://i.postimg.cc/MGPw9P1L/Amplify-Consulting-Partners-Logo.png"
                 ]
                 []
             ]

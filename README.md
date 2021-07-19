@@ -4,9 +4,20 @@ Creating an html resume with vanilla html, js, and css is cool, but would make a
 
 ## scripts
 
+### Install
+
 `yarn` -> install dependencies <br>
+
+### Run
+
 `yarn start` -> spool up dev server with elm live in watch mode <br>
-`yarn sass` -> compile and watch scss files <br>
+`yarn build` -> compile optimized elm output <br>
+`yarn minify` -> minify and compress javascript <br>
+
+### Styles
+
+`yarn watch-sass` -> compile and watch scss files <br>
+`yarn build-sass` -> compile and compress scss files <br>
 
 ## roadmap
 
@@ -21,11 +32,4 @@ Creating an html resume with vanilla html, js, and css is cool, but would make a
 - [x] language detail animations
 - [x] non-technical work experience
 - [x] projects
-- [ ] mobile view
-
-### stretch
-
-- [ ] svg amplify logo
-- [ ] svg animation on amp logo
-- [ ] animated collapsable sections
-- [ ] filterable content
+- [x] mobile view
