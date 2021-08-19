@@ -8,14 +8,13 @@ import Constants.Tech exposing (..)
 import Constants.WorkExperience exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onCheck, onClick)
+import Html.Events exposing (onClick)
 import Languages exposing (..)
 import List.Extra exposing (elemIndex)
-import Svg
-import Svg.Attributes
 import Types exposing (..)
 
 
+listIndex : a -> List a -> String
 listIndex x xs =
     case elemIndex x xs of
         Just val ->
@@ -343,6 +342,7 @@ initialModel =
     }
 
 
+summaryTitle : { a | currentView : Views } -> String
 summaryTitle model =
     case model.currentView of
         Experience ->
@@ -358,6 +358,7 @@ summaryTitle model =
             "Personal Projects"
 
 
+pageLayout : Model -> Html Msg
 pageLayout model =
     div [ class "page__layout" ]
         [ div [ class "page__left-col" ]
@@ -381,6 +382,7 @@ pageLayout model =
         ]
 
 
+experienceContent : Model -> Html Msg
 experienceContent model =
     section [ class "box" ]
         [ p [ class "box__title" ] [ text (summaryTitle model) ]
@@ -405,6 +407,7 @@ project data =
         ]
 
 
+projectContent : Html Msg
 projectContent =
     section [ class "box" ]
         [ p [ class "box__title" ]
@@ -414,6 +417,7 @@ projectContent =
         ]
 
 
+pageSelect : Model -> Html Msg
 pageSelect model =
     case model.currentView of
         Projects ->
@@ -423,6 +427,7 @@ pageSelect model =
             experienceContent model
 
 
+view : Model -> Html Msg
 view model =
     div [ class "page" ]
         [ resumeHeader
@@ -435,5 +440,6 @@ view model =
         ]
 
 
+main : Program () Model Msg
 main =
     Browser.sandbox { init = initialModel, update = update, view = view }

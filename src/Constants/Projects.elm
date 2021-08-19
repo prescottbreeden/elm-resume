@@ -99,6 +99,7 @@ ultimateFan =
     }
 
 
+allProjects : List Project
 allProjects =
     [ deFormed
     , myDevBuddy
