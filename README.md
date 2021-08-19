@@ -1,6 +1,6 @@
 # Elm-Resume
 
-Creating an html resume with vanilla html, js, and css is cool, but would make automating any updates a real pain. Because Elm compiles to a single file, and css styles can be inlined, Elm should prove extremely powerful for creating a scriptable resume and still outputing a single file to share.
+Been looking for a project to play around with Elm for a while, so I decided why not a resume web-app? Elm is super fun.
 
 ## scripts
 
